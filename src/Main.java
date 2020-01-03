@@ -67,5 +67,4 @@ public class Main {
 		}
 	}
 }
-//Änderung von Amina
 
