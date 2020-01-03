@@ -68,3 +68,4 @@ public class Main {
 	}
 }
 
+// zweiter versuch: änderung von amina
