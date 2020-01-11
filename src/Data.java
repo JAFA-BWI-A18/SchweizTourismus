@@ -97,7 +97,7 @@ public class Data {
 		Aktivitaet wellness = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Wellnes im Alpamare");
 
 		// Veranstaltung Tag 1 für Wellness im Alpamare
-		service.veranstaltungErfassen(wellness, LocalDateTime.of(20202, 8, 13, 14, 00), 20, 15);
+		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 8, 13, 14, 00), 20, 15);
 
 		// Bewertung Tag 1 Wellness im Alpamare
 		service.bewertungHinzufügen(wellness, "Toll, aber..", 4);

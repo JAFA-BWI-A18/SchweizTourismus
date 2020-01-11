@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import veranstalter.VeranstalterService;
@@ -45,7 +46,7 @@ public class Admin extends Person {
 		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
 		String veranstalterBeschrieb = scan.nextLine().trim();
-		service.veranstalterErfassen(veranstalterStr, beschreibung) ;
+	//	service.veranstalterErfassen(veranstalterStr, beschreibung) ;
 	}
 
 	// Neue Aktivität erfassen
@@ -71,21 +72,25 @@ public class Admin extends Person {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Aktivität wählen: ");
 		for (int i = 0; i < service.getAktivitaet().size(); i++) {
-			System.out.println(i + ". " + service.getAktivitaet().get(i).getBeschrieb());
+			System.out.println(i + ". " + service.getAktivitaet().get(i).getVeranstalter().getVeranstalter()+" - "+service.getAktivitaet().get(i).getBeschrieb());
 		}
-		int veranstaltungsAktivitaet = scan.nextInt();
-		System.out.println("Bitte Veranstaltungs-Datum erfassen: ");
+		int veranstaltungsAktivitaet = Integer.valueOf(scan.nextLine().trim());
+		System.out.println("Bitte Veranstaltungs-Datum erfassen (Format: DD.MM.YYYY): ");
 		String veranstaltungsDatum = scan.nextLine().trim();
-		System.out.println("Bitte Veranstaltungs-Zeit erfassen: ");
+		System.out.println("Bitte Veranstaltungs-Zeit erfassen (Format; HH:MM): ");
 		String veranstaltungsZeit = scan.nextLine().trim();
 		System.out.println("Bitte Veranstaltungs-Preis erfassen: ");
-		String veranstaltungsPreis = scan.nextLine().trim();
+		double veranstaltungsPreis = Double.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
-		String veranstaltungsPlaetze = scan.nextLine().trim();
+		int veranstaltungsPlaetze = Integer.valueOf(scan.nextLine().trim());
+		
+		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum+" "+veranstaltungsZeit, DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm"));
 		
 		// Neuen Veranstaltung erfassen Code:
-		service.veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), service.getveraveranstaltungsDatum 12.12.2020, 100, 100, offline);
+		service.veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis, veranstaltungsPlaetze);
 
+		service.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
+		
 	}
 
 }

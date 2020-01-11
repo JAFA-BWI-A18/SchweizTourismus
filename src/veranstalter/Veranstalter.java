@@ -47,5 +47,11 @@ public class Veranstalter {
 	public void aktivitaetHinzufügen(Aktivitaet aktivitaet) {
 		this.aktivitaeten.add(aktivitaet);
 	}
+
+	@Override
+	public String toString() {
+		return "Veranstalter [veranstalter=" + veranstalter + ", beschreibung=" + beschreibung + "]";
+	}
+
 	
 }

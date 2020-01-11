@@ -58,4 +58,12 @@ public class Veranstaltung {
 		return aktivitaet;
 	}
 
+	@Override
+	public String toString() {
+		return "Veranstaltung [datum=" + datum + ", preis=" + preis + ", totalPlaetze=" + totalPlaetze + ", offline="
+				+ offline + ", aktivitaet=" + aktivitaet.getBeschrieb() + "]";
+	}
+	
+	
+
 }

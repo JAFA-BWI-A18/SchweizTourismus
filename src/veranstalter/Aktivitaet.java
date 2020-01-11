@@ -99,4 +99,12 @@ public class Aktivitaet {
 	public void setBeschrieb(String beschrieb) {
 		this.beschrieb = beschrieb;
 	}
+
+	@Override
+	public String toString() {
+		return "Aktivitaet [beschrieb=" + beschrieb + ", art=" + art + ", ort=" + ort + ", plz=" + plz
+				+ ", markierungDeleted=" + markierungDeleted + ", veranstalter=" + veranstalter.getVeranstalter() + "]";
+	}
+	
+	
 }
