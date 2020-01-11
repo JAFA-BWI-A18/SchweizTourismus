@@ -4,7 +4,8 @@ public class Bewertung {
 
 	private String bewertungText;
 	private int bewertungStern;
-
+//TODO: Wir brauchen bei Kunde Menüpunkt Bewerten und diese muss alle Zahlungen auflisten, via Zahlungen kann er alle Aktivitäten auflisten und dann ausäwhlen, welche er bewerten will. 
+	
 	public Bewertung(String bewertungText, int bewertungStern) {
 		this.bewertungText = bewertungText;
 		this.bewertungStern = bewertungStern;
