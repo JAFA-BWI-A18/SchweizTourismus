@@ -1,4 +1,4 @@
 
-public class Erwachsene {
+public class Erwachsene extends Kunde {
 
 }

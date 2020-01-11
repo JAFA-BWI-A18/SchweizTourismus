@@ -19,16 +19,16 @@ public class Main {
 
 //		Person muss jeweils Instanziert werden um sie zu erfassen
 		Person person1 = new Person();
-		person1.setNachname("Salihovic");
-		person1.setVorname("Amina");
+		person1.setBenutzername("Amina");
+		person1.setPasswort("ILoveHWZ");
 
 		Person person2 = new Person();
-		person2.setNachname("Ivankovic");
-		person2.setVorname("Josip");
+		person2.setBenutzername("Josip");
+		person2.setPasswort("ILoveUML");
 
 		Person person3 = new Person();
-		person3.setNachname("Perrozzi");
-		person3.setVorname("Annika");
+		person3.setBenutzername("Annika");
+		person3.setPasswort("ILoveJava");
 
 //		Die Instanzierte Person muss der Liste zugefügt werden
 		personlist.add(person1);
@@ -65,7 +65,7 @@ public class Main {
 
 //		Personen werden herausgegeben
 		for (Person person : personlist2) {
-			System.out.println(person.getVorname() + " " + person.getNachname());
+			System.out.println(person.getBenutzername() + " " + person.getPasswort());
 		}
 	}
 }

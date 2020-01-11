@@ -1,4 +1,4 @@
 
-public class Kind {
+public class Kind extends Kunde {
 
 }

@@ -2,23 +2,23 @@ import java.io.Serializable;
 
 public class Person implements Serializable {
 
-	private String vorname;
-	private String nachname;
+	private String benutzername;
+	private String passwort;
 
-	public String getVorname() {
-		return vorname;
+	public String getBenutzername() {
+		return benutzername;
 	}
 
-	public void setVorname(String vorname) {
-		this.vorname = vorname;
+	public void setBenutzername(String benutzername) {
+		this.benutzername = benutzername;
 	}
 
-	public String getNachname() {
-		return nachname;
+	public String getPasswort() {
+		return passwort;
 	}
 
-	public void setNachname(String nachname) {
-		this.nachname = nachname;
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
 	}
 
 	public Person() {
