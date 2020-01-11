@@ -1,10 +1,14 @@
 package veranstalter;
 
 public class Bewertung {
-	
-	private int id;
+
 	private String bewertungText;
 	private int bewertungStern;
+
+	public Bewertung(String bewertungText, int bewertungStern) {
+		this.bewertungText = bewertungText;
+		this.bewertungStern = bewertungStern;
+	}
 
 	public String getBewertungText() {
 		return bewertungText;
