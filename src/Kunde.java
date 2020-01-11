@@ -3,6 +3,8 @@ import java.time.LocalDate;
 //Hier Optionen aus Kundensicht erfassen, z.B. 1 Nach Datum suchen, nach Veranstaltung suchen
 
 public class Kunde extends Person {
+	
+//	Attribute
 	private String name;
 	private String vorname;
 	private String adresse;
@@ -13,9 +15,9 @@ public class Kunde extends Person {
 	private int tel;
 	private boolean agb;
 	private LocalDate geburtstag;
-	private boolean erwachsen;
-	
+	private boolean erwachsen = true;
 
+//	Getters und Setters erstellt
 	public String getName() {
 		return name;
 	}
@@ -94,8 +96,7 @@ public class Kunde extends Person {
 
 	public void setGeburtstag(LocalDate geburtstag) {
 		this.geburtstag = geburtstag;
-		
-		
+
 	}
 
 	public boolean isErwachsen() {
@@ -105,4 +106,17 @@ public class Kunde extends Person {
 	public void setErwachsen(boolean erwachsen) {
 		this.erwachsen = erwachsen;
 	}
+
+//	Methoden Kunde
+
+	public void pruefungAlter(LocalDate datumHeute, LocalDate geburtstag) {
+		datumHeute = LocalDate.now();
+		geburtstag = this.geburtstag;
+		if (geburtstag.plusYears(16).isBefore(datumHeute)) {
+			this.erwachsen = true;
+		} else {
+			this.erwachsen = false;
+		}
+	}
+
 }
