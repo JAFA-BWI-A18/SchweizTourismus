@@ -2,6 +2,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import veranstalter.Aktivitaet;
+import veranstalter.Veranstalter;
 import veranstalter.VeranstalterService;
 
 public class Admin extends Person {
@@ -39,14 +41,14 @@ public class Admin extends Person {
 		}
 	}
 
-//Neuen Veranstalter erfassen
+	//Neuen Veranstalter erfassen
 	private static void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter-Namen erfassen: ");
 		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
 		String veranstalterBeschrieb = scan.nextLine().trim();
-	//	service.veranstalterErfassen(veranstalterStr, beschreibung) ;
+		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
 	}
 
 	// Neue Aktivität erfassen
@@ -64,15 +66,18 @@ public class Admin extends Person {
 		System.out.println("Bitte Aktivitäts-Ort erfassen: ");
 		String aktOrt = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-PLZ erfassen: ");
-		String aktPLZ = scan.nextLine().trim();
+		int aktPLZ = Integer.valueOf(scan.nextLine().trim());
+		aktErfassen(veranstalter, aktBeschrieb, aktArt, aktOrt, aktPLZ);
 	}
+//TODO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Veranstalter erfassen analog aktivität unten
 
 	// Neuen Veranstaltung erfassen Vorführen
 	private static void veranstaltungErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Aktivität wählen: ");
 		for (int i = 0; i < service.getAktivitaet().size(); i++) {
-			System.out.println(i + ". " + service.getAktivitaet().get(i).getVeranstalter().getVeranstalter()+" - "+service.getAktivitaet().get(i).getBeschrieb());
+			System.out.println(i + ". " + service.getAktivitaet().get(i).getVeranstalter().getVeranstalter() + " - "
+					+ service.getAktivitaet().get(i).getBeschrieb());
 		}
 		int veranstaltungsAktivitaet = Integer.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Veranstaltungs-Datum erfassen (Format: DD.MM.YYYY): ");
@@ -83,47 +88,49 @@ public class Admin extends Person {
 		double veranstaltungsPreis = Double.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
 		int veranstaltungsPlaetze = Integer.valueOf(scan.nextLine().trim());
-		
-		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum+" "+veranstaltungsZeit, DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm"));
-		
-		// Neuen Veranstaltung erfassen Code:
-		service.veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis, veranstaltungsPlaetze);
 
+		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum + " " + veranstaltungsZeit,
+				DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm"));
+
+		// Neuen Veranstaltung erfassen Code:
+		veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
+				veranstaltungsPlaetze);
+//TODO>>>>>>>>>>>>analog für Veranstalter
 		service.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
-		
+
+	}
+
+	public static void veranstalterErfassen(String veranstalter, String beschreibung) {
+		service.veranstalterErfassen(veranstalter, beschreibung);
+	}
+
+	public void veranstalterEditieren(String veranstalter, String beschreibung) {
+	}
+
+	public void veranstalterLoeschen() {
+	}
+
+	public static void veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis, int totalePlaetze) {
+		service.veranstaltungErfassen(a, datum, preis, totalePlaetze);
+	}
+
+	//TODO:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamter
+	public void veranstaltungEditieren(String veranstalter, String beschreibung) {
+	}
+
+	public void veranstaltungLoeschen() {
+	}
+
+//TODO: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamter
+	public static void aktErfassen(Veranstalter veranstalter, String beschrieb, String art, String ort, int plz) {
+		service.aktivitaetErfassen(veranstalter, art, ort, plz, beschrieb);
+	}
+
+//>TODO: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamte
+	public void aktEditieren(String veranstalter, String beschreibung, String art, String ort, int plz) {
+	}
+
+	public void aktLoeschen() {
 	}
 
 }
-
-//
-//	public void veranstalterErfassen(String veranstalter, String beschreibung) {
-//		service.veranstalterErfassen(veranstalter, beschreibung);
-//	}
-//
-//	public void veranstalterEditieren(String veranstalter, String beschreibung) {
-//	}
-//
-//	public void veranstalterLoeschen() {
-//	}
-//
-//	public void veranstaltungErfassen(String veranstalter, String beschreibung, String art, String ort, int plz,
-//			LocalDateTime datum, double preis, int freiePlaetze, int totalePlaetze) {
-//		service.veranstaltungErfassen(veranstalter, beschreibung, art, ort, plz, datum, preis, freiePlaetze,
-//				totalePlaetze);
-//	}
-//
-//	public void veranstaltungEditieren(String veranstalter, String beschreibung) {
-//	}
-//
-//	public void veranstaltungLoeschen() {
-//	}
-//
-//	public void aktErfassen(String veranstalter, String beschreibung, String art, String ort, int plz) {
-//		service.aktErfassen(veranstalter, beschreibung, art, ort, plz);
-//	}
-//
-//	public void aktEditieren(String veranstalter, String beschreibung, String art, String ort, int plz) {
-//	}
-//
-//	public void aktLoeschen() {
-//	}
