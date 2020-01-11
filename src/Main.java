@@ -9,7 +9,7 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
-		//Hier Login erfassen!
+		//Hier Login, Konto erfassen und Logout erstellen!
 		
 		
 		// Kunden erfassen
