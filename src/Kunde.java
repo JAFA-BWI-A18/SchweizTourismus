@@ -11,6 +11,8 @@ public class Kunde extends Person {
 	private int tel;
 	private boolean agb;
 	private LocalDate geburtstag;
+	private boolean erwachsen;
+	
 
 	public String getName() {
 		return name;
@@ -90,5 +92,15 @@ public class Kunde extends Person {
 
 	public void setGeburtstag(LocalDate geburtstag) {
 		this.geburtstag = geburtstag;
+		
+		
+	}
+
+	public boolean isErwachsen() {
+		return erwachsen;
+	}
+
+	public void setErwachsen(boolean erwachsen) {
+		this.erwachsen = erwachsen;
 	}
 }
