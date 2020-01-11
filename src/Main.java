@@ -12,6 +12,9 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
+		List<Kunde> kundelist = new ArrayList<Kunde>();
+		List<Admin> adminlist = new ArrayList<Admin>();
+		
 //		Person eintragen und speicher
 		List<Person> personlist = new ArrayList<Person>();
 //		Person wiedergeben
