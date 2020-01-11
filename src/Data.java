@@ -47,7 +47,7 @@ public class Data {
 		return admin;
 	}
 
-	// Basis Veranstalter / Aktivitäten / Veranstaltungen erfassen
+	// Basis Veranstalter / Aktivitäten / Veranstaltungen instanzieren
 	public static void basisVeranstaltung(VeranstalterService service) {
 		// Veranstalter OAF
 		Veranstalter oaf = service.veranstalterErfassen("Open Air Frauenfeld", "bla bla");
