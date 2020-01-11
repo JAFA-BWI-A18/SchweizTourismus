@@ -9,6 +9,9 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
+		//Hier Login erfassen!
+		
+		
 		// Kunden erfassen
 		List<Kunde> kundelist = Data.getKundenDaten();
 		// Kunden ausgeben
