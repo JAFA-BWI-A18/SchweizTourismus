@@ -1,8 +1,7 @@
 import java.io.Serializable;
 
 public class Person implements Serializable {
-//das ist ein Test-Kommentar von Annika
-	//das ist der zweite Test-Kommentar von Annika
+
 	private String vorname;
 	private String nachname;
 
