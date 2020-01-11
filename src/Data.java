@@ -109,8 +109,7 @@ public class Data {
 		service.bewertungHinzufügen(wellness, "Super", 5);
 
 		// Aktivität Rutschbahnen
-		Aktivitaet rutschbahnen = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807,
-				"Laengste Rutschbahnen der Schweiz");
+		Aktivitaet rutschbahnen = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Tolles Rutscherlebnis");
 
 		// Veranstaltung Tag 1 für Rutschbahnen im Alpamare
 		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20, false);
