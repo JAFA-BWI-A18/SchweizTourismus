@@ -1,4 +1,3 @@
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -6,44 +5,52 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-//Testkommentar von Josip
-//zweiter Testkommentar von Josip
 
 public class Main {
 	public static void main(String[] args) {
 
+		// Kunden erfassen
 		List<Kunde> kundelist = new ArrayList<Kunde>();
+		// Kunden ausgeben
+		List<Kunde> kundelist2 = new ArrayList<Kunde>();
+
+		// Admin erfassen
 		List<Admin> adminlist = new ArrayList<Admin>();
-		
-//		Person eintragen und speicher
-		List<Person> personlist = new ArrayList<Person>();
-//		Person wiedergeben
-		List<Person> personlist2 = new ArrayList<Person>();
+		// Admin ausgeben
+		List<Admin> adminlist2 = new ArrayList<Admin>();
 
-//		Person muss jeweils Instanziert werden um sie zu erfassen
-		Person person1 = new Person();
-		person1.setBenutzername("Amina");
-		person1.setPasswort("ILoveHWZ");
+		// Die Kunden werden instanziert für die Erfassung
+		Kunde kunde1 = new Kunde();
+		kunde1.setBenutzername("Amina");
+		kunde1.setPasswort("ILoveHWZ");
 
-		Person person2 = new Person();
-		person2.setBenutzername("Josip");
-		person2.setPasswort("ILoveUML");
+		Kunde kunde2 = new Kunde();
+		kunde2.setBenutzername("Josip");
+		kunde2.setPasswort("ILoveUML");
 
-		Person person3 = new Person();
-		person3.setBenutzername("Annika");
-		person3.setPasswort("ILoveJava");
+		Kunde kunde3 = new Kunde();
+		kunde3.setBenutzername("Annika");
+		kunde3.setPasswort("ILoveJava");
 
-//		Die Instanzierte Person muss der Liste zugefügt werden
-		personlist.add(person1);
-		personlist.add(person2);
-		personlist.add(person3);
+		// Der Admin wird instanziert für die Erfassung
+		Admin admin1 = new Admin();
+		admin1.setBenutzername("Schweiz Tourismus");
+		admin1.setPasswort("ILoveSwitzerland");
 
-//		Eine Personenfile wird angelegt
+		// Die instanzierte Kunden wird der Liste zugefügt
+		kundelist.add(kunde1);
+		kundelist.add(kunde1);
+		kundelist.add(kunde3);
+
+		// Der instanzierte Admin wird der Liste zugefügt
+		adminlist.add(admin1);
+
+		// Ein Kundenfile wird angelegt
 		try {
-			FileOutputStream fos = new FileOutputStream("PersonObject.ser");
+			FileOutputStream fos = new FileOutputStream("KundeObject.ser");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			// write object to file
-			oos.writeObject(personlist);
+			oos.writeObject(kundelist);
 			System.out.println("Done");
 			// closing resources
 			oos.close();
@@ -52,12 +59,12 @@ public class Main {
 			e.printStackTrace();
 		}
 
-//		Die Person wird ausgelesen und in der Console wiedergegeben
+		// Die Kunden werden ausgelesen und in der Console ausgegeben
 		try {
-			FileInputStream fis = new FileInputStream("PersonObject.ser");
+			FileInputStream fis = new FileInputStream("KundeObject.ser");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			// write object to file
-			personlist2 = (List<Person>) ois.readObject();
+			kundelist2 = (List<Kunde>) ois.readObject();
 			System.out.println("Done");
 			// closing resources
 			ois.close();
@@ -66,11 +73,9 @@ public class Main {
 			e.printStackTrace();
 		}
 
-//		Personen werden herausgegeben
-		for (Person person : personlist2) {
-			System.out.println(person.getBenutzername() + " " + person.getPasswort());
+		// Die Kunden werden ausgegeben
+		for (Kunde kunde : kundelist2) {
+			System.out.println("Benutzername: " + kunde.getBenutzername() + " Passwort: " + kunde.getPasswort());
 		}
 	}
 }
-
-// zweiter versuch: änderung von amina
