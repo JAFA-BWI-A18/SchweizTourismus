@@ -45,6 +45,7 @@ public class Admin extends Person {
 		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
 		String veranstalterBeschrieb = scan.nextLine().trim();
+		service.veranstalterErfassen(veranstalterStr, beschreibung) ;
 	}
 
 	// Neue Aktivität erfassen
@@ -65,14 +66,14 @@ public class Admin extends Person {
 		String aktPLZ = scan.nextLine().trim();
 	}
 
-	// Neuen Veranstaltung erfassen
+	// Neuen Veranstaltung erfassen Vorführen
 	private static void veranstaltungErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Aktivität wählen: ");
 		for (int i = 0; i < service.getAktivitaet().size(); i++) {
 			System.out.println(i + ". " + service.getAktivitaet().get(i).getBeschrieb());
 		}
-		String veranstaltungsAktivitaet = scan.nextLine().trim();
+		int veranstaltungsAktivitaet = scan.nextInt();
 		System.out.println("Bitte Veranstaltungs-Datum erfassen: ");
 		String veranstaltungsDatum = scan.nextLine().trim();
 		System.out.println("Bitte Veranstaltungs-Zeit erfassen: ");
@@ -81,6 +82,9 @@ public class Admin extends Person {
 		String veranstaltungsPreis = scan.nextLine().trim();
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
 		String veranstaltungsPlaetze = scan.nextLine().trim();
+		
+		// Neuen Veranstaltung erfassen Code:
+		service.veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), service.getveraveranstaltungsDatum 12.12.2020, 100, 100, offline);
 
 	}
 
