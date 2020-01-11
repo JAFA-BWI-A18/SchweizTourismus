@@ -9,15 +9,13 @@ public class Veranstaltung {
 
 	private LocalDateTime datum;
 	private double preis;
-	private int freiePlaetze;
 	private int totalPlaetze;
 	private boolean offline;
 	private Aktivitaet aktivitaet;
 
-	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int freiePlaetze, int totalPlaetze) {
+	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int totalPlaetze) {
 		this.datum = datum;
 		this.preis = preis;
-		this.freiePlaetze = freiePlaetze;
 		this.totalPlaetze = totalPlaetze;
 		this.offline = false;
 		this.aktivitaet = aktivitaet;
@@ -39,13 +37,6 @@ public class Veranstaltung {
 		this.preis = preis;
 	}
 
-	public int getFreiePlaetze() {
-		return freiePlaetze;
-	}
-
-	public void setFreiePlaetze(int freiePlaetze) {
-		this.freiePlaetze = freiePlaetze;
-	}
 
 	public int getTotalPlaetze() {
 		return totalPlaetze;

@@ -49,31 +49,57 @@ public class Data {
 
 	// Basis Veranstalter / Aktivitäten / Veranstaltungen erfassen
 	public static void basisVeranstaltung(VeranstalterService service) {
+		// Veranstalter OAF
 		Veranstalter oaf = service.veranstalterErfassen("Open Air Frauenfeld", "bla bla");
+
+		// Aktivität Tageseintritt für OAF
 		Aktivitaet eintritt = service.aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500);
-		Veranstaltung tag1 = service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50, 50,
-				false);
-		Veranstaltung tag2 = service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30,
-				30, false);
 
+		// Veranstaltung Tag 1 für Eintritt am OAF
+		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50, false);
+		// Bewertung der Veranstaltung Eintritt
+		service.bewertungHinzufügen(eintritt, "Geil", 5);
+		service.bewertungHinzufügen(eintritt, "Hammer", 5);
+		service.bewertungHinzufügen(eintritt, "Nice", 4);
+		// Veranstaltung Tag 2 für Eintritt am OAF
+		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30, false);
+		// Bewertung der Veranstaltung Eintritt
+		service.bewertungHinzufügen(eintritt, "Jedes Jahr wieder", 5);
+		service.bewertungHinzufügen(eintritt, "Danke, mega toll", 5);
+		service.bewertungHinzufügen(eintritt, "Schlimm", 1);
+
+		// Aktivität Übernachtung für OAF
 		Aktivitaet uebernachtung = service.aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500);
-		Veranstaltung nacht1 = service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 50,
-				100, 100, false);
-		Veranstaltung nacht2 = service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50,
-				50, 50, false);
 
+		// Veranstaltung Nacht 1 für Übernachtung am OAF
+		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 100, 100, false);
+		// Bewertung der Veranstaltung Übernachtung Nacht1
+		service.bewertungHinzufügen(uebernachtung, "Mega bequem", 5);
+		service.bewertungHinzufügen(uebernachtung, "Schmutzig", 2);
+
+		// Veranstaltung Nacht 2 für Übernachtung am OAF
+		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50, 50, false);
+		// Bewertung der Veranstaltung Übernachtung Nacht2
+		service.bewertungHinzufügen(uebernachtung, "Toll", 5);
+		service.bewertungHinzufügen(uebernachtung, "Nie wider", 1);
+		service.bewertungHinzufügen(uebernachtung, "Schlimm", 1);
+
+		// Veranstaltung Alpamare
 		Veranstalter alpamare = service.veranstalterErfassen("Alpamare", "bla bla");
 		Aktivitaet wellness = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807);
-		Veranstaltung event1 = service.veranstaltungErfassen(wellness, LocalDateTime.of(20202, 8, 13, 14, 00), 20, 15,
-				15, false);
-		Veranstaltung event2 = service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20,
-				20, false);
+
+		service.veranstaltungErfassen(wellness, LocalDateTime.of(20202, 8, 13, 14, 00), 20, 15, false);
+		service.bewertungHinzufügen(wellness, "Toll, aber..", 4);
+		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20, false);
+		service.bewertungHinzufügen(wellness, "Super", 5);
 
 		Aktivitaet rutschbahnen = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807);
-		Veranstaltung fun1 = service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20,
-				20, false);
-		Veranstaltung fun2 = service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15,
-				15, false);
+		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20, false);
+		service.bewertungHinzufügen(rutschbahnen, "Sensationell", 5);
+		service.bewertungHinzufügen(rutschbahnen, "Schlecht", 1);
+		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15, false);
+		service.bewertungHinzufügen(rutschbahnen, "ok", 3);
+		service.bewertungHinzufügen(rutschbahnen, "Nice", 5);
 	}
 
 }
