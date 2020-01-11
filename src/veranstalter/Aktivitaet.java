@@ -78,6 +78,15 @@ public class Aktivitaet {
 	public List<Integer> getBewertungStern() {
 		return bewertungen.stream().map(b -> b.getBewertungStern()).collect(Collectors.toList());
 	}
+	
+	public double getAnzeigeBewertungStern() {
+		List<Integer> sterne =  getBewertungStern();
+		if(sterne.size()> 0) {
+			return sterne.stream().mapToDouble(Double::valueOf).sum() / (double) sterne.size();
+		}
+		return -1;
+	}
+
 
 	public String getBeschrieb() {
 		return beschrieb;
