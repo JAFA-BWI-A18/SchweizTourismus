@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class Aktivitaet {
 
+	private String beschrieb;
 	private String art; // Indoor Outdoor
 	private String ort;
 	private int plz;
@@ -14,11 +15,12 @@ public class Aktivitaet {
 	private ArrayList<Veranstaltung> veranstaltung;
 	private ArrayList<Bewertung> bewertungen;
 	
-	public Aktivitaet(String art, String ort, int plz, Veranstalter veranstalter) {
+	public Aktivitaet(String art, String ort, int plz, Veranstalter veranstalter, String beschrieb) {
 		super();
 		this.art = art;
 		this.ort = ort;
 		this.plz = plz;
+		this.beschrieb = beschrieb;
 		this.markierungDeleted = false;
 		this.veranstalter = veranstalter;
 		this.veranstaltung = new ArrayList<>();
@@ -75,5 +77,13 @@ public class Aktivitaet {
 
 	public List<Integer> getBewertungStern() {
 		return bewertungen.stream().map(b -> b.getBewertungStern()).collect(Collectors.toList());
+	}
+
+	public String getBeschrieb() {
+		return beschrieb;
+	}
+
+	public void setBeschrieb(String beschrieb) {
+		this.beschrieb = beschrieb;
 	}
 }

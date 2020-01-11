@@ -13,6 +13,7 @@ public class Veranstalter {
 	public Veranstalter(String veranstalter, String beschreibung) {
 		this.veranstalter = veranstalter;
 		this.beschreibung = beschreibung;
+		this.aktivitaeten = new ArrayList<>();
 	}
 	
 	public String getVeranstalter() {

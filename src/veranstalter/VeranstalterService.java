@@ -39,8 +39,8 @@ public class VeranstalterService {
 		veranstalter.remove(v);
 	}
 
-	public Aktivitaet aktivitaetErfassen(Veranstalter v, String art, String ort, int plz) {
-		Aktivitaet tmp = new Aktivitaet(art, ort, plz, v);
+	public Aktivitaet aktivitaetErfassen(Veranstalter v, String art, String ort, int plz, String beschrieb) {
+		Aktivitaet tmp = new Aktivitaet(art, ort, plz, v, beschrieb);
 		v.aktivitaetHinzufügen(tmp);
 		aktivitaeten.add(tmp);
 		return tmp;
