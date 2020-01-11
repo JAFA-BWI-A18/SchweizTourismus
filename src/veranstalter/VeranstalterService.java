@@ -38,7 +38,7 @@ public class VeranstalterService {
 
 	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis, int freiePlaetze,
 			int totalPlaetze, boolean offline) {
-		Veranstaltung tmp = new Veranstaltung(a, datum, preis, freiePlaetze, totalPlaetze, offline);
+		Veranstaltung tmp = new Veranstaltung(a, datum, preis, freiePlaetze, totalPlaetze);
 		a.veranstaltungHinzufügen(tmp);
 		veranstaltungen.add(tmp);
 		return tmp;

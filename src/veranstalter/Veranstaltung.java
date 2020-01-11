@@ -14,13 +14,12 @@ public class Veranstaltung {
 	private boolean offline;
 	private Aktivitaet aktivitaet;
 
-	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int freiePlaetze, int totalPlaetze,
-			boolean offline) {
+	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int freiePlaetze, int totalPlaetze) {
 		this.datum = datum;
 		this.preis = preis;
 		this.freiePlaetze = freiePlaetze;
 		this.totalPlaetze = totalPlaetze;
-		this.offline = offline;
+		this.offline = false;
 		this.aktivitaet = aktivitaet;
 	}
 
