@@ -1,5 +1,7 @@
 import java.time.LocalDate;
 
+//Hier Optionen aus Kundensicht erfassen, z.B. 1 Nach Datum suchen, nach Veranstaltung suchen
+
 public class Kunde extends Person {
 	private String name;
 	private String vorname;

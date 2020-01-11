@@ -9,8 +9,11 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
+		//Hier Login erfassen!
+		
+		
 		// Kunden erfassen
-		List<Kunde> kundelist = new ArrayList<Kunde>();
+		List<Kunde> kundelist = Data.getKundenDaten();
 		// Kunden ausgeben
 		List<Kunde> kundelist2 = new ArrayList<Kunde>();
 
@@ -18,32 +21,6 @@ public class Main {
 		List<Admin> adminlist = new ArrayList<Admin>();
 		// Admin ausgeben
 		List<Admin> adminlist2 = new ArrayList<Admin>();
-
-		// Die Kunden werden instanziert für die Erfassung
-		Kunde kunde1 = new Kunde();
-		kunde1.setBenutzername("Amina");
-		kunde1.setPasswort("ILoveHWZ");
-
-		Kunde kunde2 = new Kunde();
-		kunde2.setBenutzername("Josip");
-		kunde2.setPasswort("ILoveUML");
-
-		Kunde kunde3 = new Kunde();
-		kunde3.setBenutzername("Annika");
-		kunde3.setPasswort("ILoveJava");
-
-		// Der Admin wird instanziert für die Erfassung
-		Admin admin1 = new Admin();
-		admin1.setBenutzername("Schweiz Tourismus");
-		admin1.setPasswort("ILoveSwitzerland");
-
-		// Die instanzierte Kunden wird der Liste zugefügt
-		kundelist.add(kunde1);
-		kundelist.add(kunde1);
-		kundelist.add(kunde3);
-
-		// Der instanzierte Admin wird der Liste zugefügt
-		adminlist.add(admin1);
 
 		// Ein Kundenfile wird angelegt
 		try {
