@@ -1,13 +1,17 @@
+package veranstalter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Veranstaltung {
 
+	private int id;
 	private LocalDate zeit;
 	private LocalDate datum;
 	private double preis;
 	private int freiePlaetze;
 	private int totalPlaetze;
 	private boolean offline;
+	private Integer aktivitaetId;
 	
 	
 	public LocalDate getZeit() {
@@ -47,6 +51,12 @@ public class Veranstaltung {
 		this.offline = offline;
 	}
 	
-	
+	public Integer getAktivitaetId() {
+		return aktivitaetId;
+	}
+		
+	public void setAktivitaet(Aktivitaet aktivitaet) {
+		this.aktivitaetId = aktivitaet.getId();
+	}
 
 }

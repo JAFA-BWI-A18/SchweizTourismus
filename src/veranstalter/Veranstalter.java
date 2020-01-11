@@ -1,11 +1,24 @@
+package veranstalter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Veranstalter {
 
+	private int id;
 	private String veranstalter;
-	private String anzeigeBewertungText;
-	private String anzeigeBewertungStern;
 	private String beschreibung;
 	
+	private ArrayList<Aktivitaet> aktivitaeten;
+	
+	public Veranstalter(int id, String veranstalter, String beschreibung) {
+		this.id = id;
+		this.veranstalter = veranstalter;
+		this.beschreibung = beschreibung;
+	}
+	
+	public int getId() {
+		return id;
+	}
 	
 	public String getVeranstalter() {
 		return veranstalter;
@@ -13,13 +26,13 @@ public class Veranstalter {
 	public void setVeranstalter(String veranstalter) {
 		this.veranstalter = veranstalter;
 	}
-	public String getAnzeigeBewertungText() {
-		return anzeigeBewertungText;
+	public ArrayList<String> getAnzeigeBewertungText() {
+		return veranstaltungen.stream().flatMap(v.getA)
 	}
 	public void setAnzeigeBewertungText(String anzeigeBewertungText) {
 		this.anzeigeBewertungText = anzeigeBewertungText;
 	}
-	public String getAnzeigeBewertungStern() {
+	public List<Double> getAnzeigeBewertungStern() {
 		return anzeigeBewertungStern;
 	}
 	public void setAnzeigeBewertungStern(String anzeigeBewertungStern) {
@@ -31,7 +44,13 @@ public class Veranstalter {
 	public void setBeschreibung(String beschreibung) {
 		this.beschreibung = beschreibung;
 	}
-
 	
+	public ArrayList<Aktivitaet> getAktivitaeten(){
+		return aktivitaeten;
+	}
+	
+	public void aktivitaetHinzufügen(Aktivitaet aktivitaet) {
+		
+	}
 	
 }

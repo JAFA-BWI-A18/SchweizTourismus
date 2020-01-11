@@ -1,13 +1,22 @@
+package veranstalter;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Aktivitaet {
 
+	private int id;
 	private String art; // Indoor Outdoor
 	private String ort;
 	private int plz;
 	private boolean markierungDeleted;
-	private String bewertungText;
-	private double bewertungStern;
+	private Integer veranstalterId;
+	private ArrayList<Veranstaltung> veranstaltung;
+	private ArrayList<Bewertung> bewertungen;
 	
+	public int getId() {
+		return id;
+	}
 	
 	public String getArt() {
 		return art;
@@ -33,19 +42,12 @@ public class Aktivitaet {
 	public void setMarkierungDeleted(boolean markierungDeleted) {
 		this.markierungDeleted = markierungDeleted;
 	}
-	public String getBewertungText() {
-		return bewertungText;
-	}
-	public void setBewertungText(String bewertungText) {
-		this.bewertungText = bewertungText;
-	}
-	public double getBewertungStern() {
-		return bewertungStern;
-	}
-	public void setBewertungStern(double bewertungStern) {
-		this.bewertungStern = bewertungStern;
+	
+	public Integer getVeranstalterId() {
+		return veranstalterId;
 	}
 	
-	
-
+	public void bewertungHinzugügen(Bewertung bewertung) {
+		bewertungen.add(bewertung);
+	}
 }

@@ -1,8 +1,10 @@
+package veranstalter;
 
 public class Bewertung {
+	
+	private int id;
 	private String bewertungText;
-	private double bewertungStern;
-	private int stern;
+	private int bewertungStern;
 
 	public String getBewertungText() {
 		return bewertungText;
@@ -12,19 +14,12 @@ public class Bewertung {
 		this.bewertungText = bewertungText;
 	}
 
-	public double getBewertungStern() {
+	public int getBewertungStern() {
 		return bewertungStern;
 	}
 
-	public void setBewertungStern(double bewertungStern) {
+	public void setBewertungStern(int bewertungStern) {
 		this.bewertungStern = bewertungStern;
 	}
 
-	public int getStern() {
-		return stern;
-	}
-
-	public void setStern(int stern) {
-		this.stern = stern;
-	}
 }
