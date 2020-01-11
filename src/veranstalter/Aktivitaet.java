@@ -70,6 +70,10 @@ public class Aktivitaet {
 	public void veranstaltungHinzufügen(Veranstaltung v) {
 		veranstaltung.add(v);
 	}
+	
+	public List<Veranstaltung> getVeranstaltungen() {
+		return veranstaltung;
+	}
 
 	public List<String> getBewertungText() {
 		return bewertungen.stream().map(b -> b.getBewertungText()).collect(Collectors.toList());

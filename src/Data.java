@@ -57,7 +57,7 @@ public class Data {
 				"Eintritt zum groessten Festival");
 
 		// Veranstaltung Tag 1 für Eintritt am OAF
-		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50, false);
+		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50);
 
 		// Bewertung der Veranstaltung Eintritt Tag 1
 		service.bewertungHinzufügen(eintritt, "Geil", 5);
@@ -65,7 +65,7 @@ public class Data {
 		service.bewertungHinzufügen(eintritt, "Nice", 4);
 
 		// Veranstaltung Tag 2 für Eintritt am OAF
-		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30, false);
+		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30);
 
 		// Bewertung der Veranstaltung Eintritt Tag 2
 		service.bewertungHinzufügen(eintritt, "Jedes Jahr wieder", 5);
@@ -76,14 +76,14 @@ public class Data {
 		Aktivitaet uebernachtung = service.aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500, "Camping Upgrade");
 
 		// Veranstaltung Nacht 1 für Übernachtung am OAF
-		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 100, 100, false);
+		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 100, 100);
 
 		// Bewertung der Veranstaltung Übernachtung Nacht1
 		service.bewertungHinzufügen(uebernachtung, "Mega bequem", 5);
 		service.bewertungHinzufügen(uebernachtung, "Schmutzig", 2);
 
 		// Veranstaltung Nacht 2 für Übernachtung am OAF
-		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50, 50, false);
+		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50, 50);
 
 		// Bewertung der Veranstaltung Übernachtung Nacht2
 		service.bewertungHinzufügen(uebernachtung, "Toll", 5);
@@ -97,13 +97,13 @@ public class Data {
 		Aktivitaet wellness = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Wellnes im Alpamare");
 
 		// Veranstaltung Tag 1 für Wellness im Alpamare
-		service.veranstaltungErfassen(wellness, LocalDateTime.of(20202, 8, 13, 14, 00), 20, 15, false);
+		service.veranstaltungErfassen(wellness, LocalDateTime.of(20202, 8, 13, 14, 00), 20, 15);
 
 		// Bewertung Tag 1 Wellness im Alpamare
 		service.bewertungHinzufügen(wellness, "Toll, aber..", 4);
 
 		// Veranstaltung Tag 2 für Wellness im Alpamare
-		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20, false);
+		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20);
 
 		// Bewertung Tag 2 Wellness im Alpamare
 		service.bewertungHinzufügen(wellness, "Super", 5);
@@ -112,14 +112,14 @@ public class Data {
 		Aktivitaet rutschbahnen = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Tolles Rutscherlebnis");
 
 		// Veranstaltung Tag 1 für Rutschbahnen im Alpamare
-		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20, false);
+		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20);
 
 		// Bewertung Tag 1 Rutschbahnen im Alpamare
 		service.bewertungHinzufügen(rutschbahnen, "Sensationell", 5);
 		service.bewertungHinzufügen(rutschbahnen, "Schlecht", 1);
 
 		// Veranstaltung Tag 2 für Rutschbahnen im Alpamare
-		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15, false);
+		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15);
 
 		// Bewertung Tag 2 Rutschbahnen im Alpamare
 		service.bewertungHinzufügen(rutschbahnen, "ok", 3);
