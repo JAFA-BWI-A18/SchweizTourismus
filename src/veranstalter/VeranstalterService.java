@@ -19,6 +19,16 @@ public class VeranstalterService {
 		this.veranstaltungen = new ArrayList<>();
 	}
 
+	public List<Veranstalter> getVeranstalter(){
+		return veranstalter;
+	}
+	public List<Aktivitaet> getAktivitaet(){
+		return aktivitaeten;
+	}
+	public List<Veranstaltung> getVeranstaltung (){
+		return veranstaltungen;
+	}
+	
 	public Veranstalter veranstalterErfassen(String veranstalterStr, String beschreibung) {
 		Veranstalter tmp = new Veranstalter(veranstalterStr, beschreibung);
 		veranstalter.add(tmp);
