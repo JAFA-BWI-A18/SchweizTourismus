@@ -8,12 +8,24 @@ import veranstalter.Veranstaltung;
 
 public class Person implements Serializable {
 
+	
+	private static VeranstalterService service = new VeranstalterService();
+	static {
+		Data.basisVeranstaltung(service);
+	}
+	
+	public static void main(String[] args) {
+		Person person = new Person();
+		person.suchen();
+		
+		
+	}
+	
 //	Attribute
 
 	private String benutzername;
 	private String passwort;
-	private VeranstalterService service;
-
+	
 //	Getters und Setter erstellt
 
 	public String getBenutzername() {
@@ -45,7 +57,6 @@ public class Person implements Serializable {
 		System.out.println("Um eine Veranstaltung zu suchen, wählen Sie 3.");
 		Scanner scan = new Scanner(System.in);
 		int auswahl1 = scan.nextInt();
-		scan.close();
 
 		if (auswahl1 == 1) {
 			// Alle Veranstalter werden angegeben
@@ -54,9 +65,9 @@ public class Person implements Serializable {
 				System.out.println(i + " ist " + service.getVeranstalter().get(i).getVeranstalter());
 			}
 			// Der gewünschte Veranstalter wird angegeben
-			Scanner scan2 = new Scanner(System.in);
+			Scanner scan1 = new Scanner(System.in);
 			int auswahlVeranstalter = scan.nextInt();
-			scan2.close();
+			
 			// Alle Aktivitäten des oben gewünschten Veranstalters werden angegeben
 			Veranstalter veranstalter = service.getVeranstalter().get(auswahlVeranstalter);
 			System.out.println("Wählen Sie eine Aktivität aus:");
@@ -66,7 +77,7 @@ public class Person implements Serializable {
 			// Die gewünschte Aktivität wird angegeben
 			Scanner scan3 = new Scanner(System.in);
 			int auswahlAktivitaet = scan.nextInt();
-			scan3.close();
+			
 			// Alle Veranstaltungen der oben gewünschten Aktivität werden angegeben
 			Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
@@ -76,7 +87,7 @@ public class Person implements Serializable {
 			// Die gewünschte Veranstaltung wird angegeben
 			Scanner scan4 = new Scanner(System.in);
 			int auswahlVeranstaltung = scan.nextInt();
-			scan4.close();
+			
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
@@ -92,7 +103,7 @@ public class Person implements Serializable {
 			// Die gewünschte Aktivität kann gewählt werden
 			Scanner scan5 = new Scanner(System.in);
 			int auswahlAktivitaet = scan.nextInt();
-			scan5.close();
+			
 			// Alle Veranstaltungen werden angegeben von der obigen Aktivität
 			Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
@@ -101,7 +112,7 @@ public class Person implements Serializable {
 			}
 			Scanner scan6 = new Scanner(System.in);
 			int auswahlVeranstaltung = scan.nextInt();
-			scan6.close();
+			
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			System.out.println("Ihre Auswahl, Veranstalter: " + aktivitaet.getVeranstalter() + "/nAktivität: "
@@ -114,7 +125,7 @@ public class Person implements Serializable {
 			}
 			Scanner scan7 = new Scanner(System.in);
 			int auswahlVeranstaltung = scan.nextInt();
-			scan7.close();
+			
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			System.out.println("Ihre Auswahl, Veranstalter: " + veranstaltung.getAktivitaet().getVeranstalter()
