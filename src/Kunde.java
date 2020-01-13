@@ -1,9 +1,8 @@
 import java.time.LocalDate;
-
-//Hier Optionen aus Kundensicht erfassen, z.B. 1 Nach Datum suchen, nach Veranstaltung suchen
+import java.util.Scanner;
 
 public class Kunde extends Person {
-	
+
 //	Attribute
 	private String name;
 	private String vorname;
@@ -109,14 +108,83 @@ public class Kunde extends Person {
 
 //	Methoden Kunde
 
+	public static void main(String[] args) {
+		Kunde kunde = new Kunde();
+		kunde.zahlen();
+	}
+
+	// Das Alter des Kundens wird überprüft, um festzustellen ob dieser Erwachsen
+	// oder ein Kind ist
 	public void pruefungAlter(LocalDate datumHeute, LocalDate geburtstag) {
+		// Heutiges Datum wird abgefragt
 		datumHeute = LocalDate.now();
+		// Geburtstag des Kunden wird eingelesen
 		geburtstag = this.geburtstag;
 		if (geburtstag.plusYears(16).isBefore(datumHeute)) {
 			this.erwachsen = true;
 		} else {
 			this.erwachsen = false;
 		}
+	}
+
+	// Alter wird überprüft und allenfalls von einem Kind zum Erwachsenen
+	// umgewandelt
+	public void umwandeln() {
+		// Wenn der Kunde noch ein Kind ist, wird sein Alter überprüft
+		if (erwachsen == false) {
+			geburtstag = this.geburtstag;
+			LocalDate datumHeute = LocalDate.now();
+			// Falls dieser älter ist als 16, wird das Attribut erwachsen auf true gesetzt
+			if (geburtstag.plusYears(16).isBefore(datumHeute)) {
+				this.erwachsen = true;
+				System.out.println("Sie sind jetzt erwachsen und können Buchungen und Bewertungen vornehmen.");
+			}
+			// Falls dieser jünger ist als 16, bleibt dieser ein Kind
+			else {
+				this.erwachsen = false;
+			}
+		}
+		// Ist der Kunde bereits erwachsen bei der Registrierung, wird nicht passieren
+		else {
+			// mach nix
+		}
+	}
+
+	public void buchen() {
+
+	}
+
+	public void zahlen() {
+		// Zahlungsdaten werden erfasst
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Bitte wählen Sie eine Zahlungsmethode aus:");
+		String eingabeZahlungsmethode = scan.nextLine();
+		System.out.println("Bitte geben Sie den Karteninhaber ein:");
+		String eingabeKartenInhaber = scan.nextLine();
+		System.out.println("Bitte geben Sie ihre Kartennummer ein:");
+		String eingabeKartennummer = scan.nextLine();
+		System.out.println("Bitte geben Sie das Verfallsdatum der Karte ein:");
+		String eingabeVerfallsdatum = scan.nextLine();
+		System.out.println("Bitte geben Sie den CVC-Code ein:");
+		int eingabeCVCCode = scan.nextInt();
+		// Zahlungsdaten werden bestätigt
+		System.out.println("Sind die folgenden Daten korrekt?" + "\nZahlungsmethode: " + eingabeZahlungsmethode
+				+ "\nKarteninhaber:" + eingabeKartenInhaber + "\nKartennummer: " + eingabeKartennummer
+				+ "\nVerfallsdatum: " + eingabeVerfallsdatum + "\nCVC Code: " + eingabeCVCCode);
+		String bestaetigung = scan.next();
+		switch (bestaetigung) {
+		case "ja":
+			System.out.println("Bezahlung erfolgreich.");
+			break;
+		case "nein":
+			System.out.println("Zahlvorgang abgebrochen.");
+		default:
+		}
+		scan.close();
+	}
+
+	public void bewerten() {
+
 	}
 
 }
