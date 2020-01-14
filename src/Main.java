@@ -9,6 +9,12 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
+		// Use Case "Aktivität verwalten" aus Admin-Sicht
+		Admin admin = new Admin();
+		admin.main(args);
+		admin.main(args);
+		admin.main(args);
+
 		//TODO Hier Login, Konto erfassen und Logout erstellen!
 		
 		// Kunden erfassen
