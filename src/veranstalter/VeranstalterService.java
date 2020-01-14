@@ -41,7 +41,7 @@ public class VeranstalterService {
 
 	public Aktivitaet aktivitaetErfassen(Veranstalter v, String art, String ort, int plz, String beschrieb) {
 		Aktivitaet tmp = new Aktivitaet(art, ort, plz, v, beschrieb);
-		v.aktivitaetHinzufügen(tmp);
+		v.aktivitaetHinzufuegen(tmp);
 		aktivitaeten.add(tmp);
 		return tmp;
 	}
@@ -49,14 +49,14 @@ public class VeranstalterService {
 	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis,
 			int totalPlaetze) {
 		Veranstaltung tmp = new Veranstaltung(a, datum, preis, totalPlaetze);
-		a.veranstaltungHinzufügen(tmp);
+		a.veranstaltungHinzufuegen(tmp);
 		veranstaltungen.add(tmp);
 		return tmp;
 	}
 	
-	public String bewertungHinzufügen(Aktivitaet a, String text, int stern) {
+	public String bewertungHinzufuegen(Aktivitaet a, String text, int stern) {
 		Bewertung tmp = new Bewertung(text, stern);
-		a.bewertungHinzugügen(tmp);
+		a.bewertungHinzuguegen(tmp);
 		if(tmp.getBewertungText() != null && !tmp.getBewertungText().isBlank()) {
 			return "couponCode";	
 		}
