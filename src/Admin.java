@@ -29,7 +29,7 @@ public class Admin extends Person {
 			break;
 
 		case "4":
-			aktErfassenInput();
+			aktivitaetErfassenInput();
 			break;
 
 		case "7":
@@ -41,18 +41,21 @@ public class Admin extends Person {
 		}
 	}
 
-	//Neuen Veranstalter erfassen
+	// Neuen Veranstalter erfassen Vorführen
 	private static void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter-Namen erfassen: ");
 		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
 		String veranstalterBeschrieb = scan.nextLine().trim();
+
+		// Neuen Veranstalter erfassen Code:
 		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
+		service.getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
-	// Neue Aktivität erfassen
-	private static void aktErfassenInput() {
+	// Neue Aktivität erfassen Vorführen
+	private static void aktivitaetErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter wählen: ");
 		for (int i = 0; i < service.getVeranstalter().size(); i++) {
@@ -66,10 +69,12 @@ public class Admin extends Person {
 		System.out.println("Bitte Aktivitäts-Ort erfassen: ");
 		String aktOrt = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-PLZ erfassen: ");
-		int aktPLZ = Integer.valueOf(scan.nextLine().trim());
-		aktErfassen(veranstalter, aktBeschrieb, aktArt, aktOrt, aktPLZ);
+		int aktPLZ = Integer.valueOf(scan.nextLine().trim()); 
+
+		// Neue Aktivtität erfassen Code:
+		aktErfassen(service.getVeranstalter(), aktBeschrieb, aktArt, aktOrt, aktPLZ);
+		service.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
-//TODO>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Veranstalter erfassen analog aktivität unten
 
 	// Neuen Veranstaltung erfassen Vorführen
 	private static void veranstaltungErfassenInput() {
@@ -95,11 +100,10 @@ public class Admin extends Person {
 		// Neuen Veranstaltung erfassen Code:
 		veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
 				veranstaltungsPlaetze);
-//TODO>>>>>>>>>>>>analog für Veranstalter
 		service.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
-
 	}
 
+	// Weitere Methoden
 	public static void veranstalterErfassen(String veranstalter, String beschreibung) {
 		service.veranstalterErfassen(veranstalter, beschreibung);
 	}
@@ -114,23 +118,19 @@ public class Admin extends Person {
 		service.veranstaltungErfassen(a, datum, preis, totalePlaetze);
 	}
 
-	//TODO:>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamter
-	public void veranstaltungEditieren(String veranstalter, String beschreibung) {
+	public void veranstaltungEditieren(Aktivitaet a, LocalDateTime datum, double preis, int totalePlaetze) {
 	}
 
 	public void veranstaltungLoeschen() {
 	}
 
-//TODO: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamter
-	public static void aktErfassen(Veranstalter veranstalter, String beschrieb, String art, String ort, int plz) {
-		service.aktivitaetErfassen(veranstalter, art, ort, plz, beschrieb);
+	public static void aktErfassen(Veranstalter veranstalter, String beschreibung, String art, String ort, int plz) {
+		service.aktivitaetErfassen(veranstalter, art, ort, plz, beschreibung);
 	}
 
-//>TODO: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Kontrolle Paraamte
-	public void aktEditieren(String veranstalter, String beschreibung, String art, String ort, int plz) {
+	public void aktEditieren(Veranstalter veranstalter, String beschreibung, String art, String ort, int plz) {
 	}
 
 	public void aktLoeschen() {
 	}
-
 }
