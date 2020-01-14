@@ -9,8 +9,7 @@ import java.util.List;
 public class Main {
 	public static void main(String[] args) {
 
-		//Hier Login, Konto erfassen und Logout erstellen!
-		
+		//TODO Hier Login, Konto erfassen und Logout erstellen!
 		
 		// Kunden erfassen
 		List<Kunde> kundelist = Data.getKundenDaten();
