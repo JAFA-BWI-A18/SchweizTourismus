@@ -61,7 +61,7 @@ public class Admin extends Person {
 		for (int i = 0; i < service.getVeranstalter().size(); i++) {
 			System.out.println(i + ". " + service.getVeranstalter().get(i).getVeranstalter());
 		}
-		String aktVeranstalter = scan.nextLine().trim();
+		int aktVeranstalter = Integer.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Aktivitäts-Beschrieb erfassen: ");
 		String aktBeschrieb = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-Art erfassen: ");
@@ -69,10 +69,10 @@ public class Admin extends Person {
 		System.out.println("Bitte Aktivitäts-Ort erfassen: ");
 		String aktOrt = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-PLZ erfassen: ");
-		int aktPLZ = Integer.valueOf(scan.nextLine().trim()); 
+		int aktPLZ = Integer.valueOf(scan.nextLine().trim());
 
 		// Neue Aktivtität erfassen Code:
-		aktErfassen(service.getVeranstalter(), aktBeschrieb, aktArt, aktOrt, aktPLZ);
+		aktErfassen(service.getVeranstalter().get(aktVeranstalter), aktBeschrieb, aktArt, aktOrt, aktPLZ);
 		service.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
 

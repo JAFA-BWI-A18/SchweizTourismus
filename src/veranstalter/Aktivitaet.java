@@ -14,7 +14,7 @@ public class Aktivitaet {
 	private Veranstalter veranstalter;
 	private ArrayList<Veranstaltung> veranstaltung;
 	private ArrayList<Bewertung> bewertungen;
-	
+
 	public Aktivitaet(String art, String ort, int plz, Veranstalter veranstalter, String beschrieb) {
 		super();
 		this.art = art;
@@ -62,7 +62,7 @@ public class Aktivitaet {
 	public Veranstalter getVeranstalter() {
 		return veranstalter;
 	}
-	
+
 	public void bewertungHinzugügen(Bewertung b) {
 		bewertungen.add(b);
 	}
@@ -70,7 +70,7 @@ public class Aktivitaet {
 	public void veranstaltungHinzufügen(Veranstaltung v) {
 		veranstaltung.add(v);
 	}
-	
+
 	public List<Veranstaltung> getVeranstaltungen() {
 		return veranstaltung;
 	}
@@ -82,15 +82,14 @@ public class Aktivitaet {
 	public List<Integer> getBewertungStern() {
 		return bewertungen.stream().map(b -> b.getBewertungStern()).collect(Collectors.toList());
 	}
-	
+
 	public double getAnzeigeBewertungStern() {
-		List<Integer> sterne =  getBewertungStern();
-		if(sterne.size()> 0) {
+		List<Integer> sterne = getBewertungStern();
+		if (sterne.size() > 0) {
 			return sterne.stream().mapToDouble(Double::valueOf).sum() / (double) sterne.size();
 		}
 		return -1;
 	}
-
 
 	public String getBeschrieb() {
 		return beschrieb;
@@ -105,6 +104,4 @@ public class Aktivitaet {
 		return "Aktivitaet [beschrieb=" + beschrieb + ", art=" + art + ", ort=" + ort + ", plz=" + plz
 				+ ", markierungDeleted=" + markierungDeleted + ", veranstalter=" + veranstalter.getVeranstalter() + "]";
 	}
-	
-	
 }
