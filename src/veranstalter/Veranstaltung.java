@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 public class Veranstaltung {
 
+//	Attribute
 	private LocalDateTime datum;
 	private double preis;
 	private int totalPlaetze;
 	private boolean offline;
 	private Aktivitaet aktivitaet;
 
+//	Konstruktoren
 	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int totalPlaetze) {
 		this.datum = datum;
 		this.preis = preis;
@@ -20,7 +22,12 @@ public class Veranstaltung {
 		this.offline = false;
 		this.aktivitaet = aktivitaet;
 	}
+	
+	public Veranstaltung() {
+		
+	}
 
+//	Getters und Setters erstellt
 	public LocalDateTime getDatum() {
 		return datum;
 	}
@@ -36,7 +43,6 @@ public class Veranstaltung {
 	public void setPreis(double preis) {
 		this.preis = preis;
 	}
-
 
 	public int getTotalPlaetze() {
 		return totalPlaetze;
@@ -63,7 +69,5 @@ public class Veranstaltung {
 		return "Veranstaltung [datum=" + datum + ", preis=" + preis + ", totalPlaetze=" + totalPlaetze + ", offline="
 				+ offline + ", aktivitaet=" + aktivitaet.getBeschrieb() + "]";
 	}
-	
-	
 
 }
