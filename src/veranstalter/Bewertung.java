@@ -7,15 +7,17 @@ public class Bewertung {
 //		Data.basisVeranstaltung(service);
 	}
 
+//	Attribute
 	private String bewertungText;
 	private int bewertungStern;
-//TODO: Wir brauchen bei Kunde Menüpunkt Bewerten und diese muss alle Zahlungen auflisten, via Zahlungen kann er alle Aktivitäten auflisten und dann ausäwhlen, welche er bewerten will. 
 
+//	Konstruktor
 	public Bewertung(String bewertungText, int bewertungStern) {
 		this.bewertungText = bewertungText;
 		this.bewertungStern = bewertungStern;
 	}
 
+//	Getters und Setters für definierte Attribute
 	public String getBewertungText() {
 		return bewertungText;
 	}
@@ -32,7 +34,14 @@ public class Bewertung {
 		this.bewertungStern = bewertungStern;
 	}
 
+//	Methoden
 	public static void bewertungHinzufuegen(Aktivitaet aktivitaet, String bewertungText, int bewertungStern) {
-	service.bewertungHinzufuegen(aktivitaet, bewertungText, bewertungStern);
+		service.bewertungHinzufuegen(aktivitaet, bewertungText, bewertungStern);
+	}
+	
+	//TODO Wenn eine Bewertung abgegeben wurde, wird ein Gutschein erstellt und verschickt.
+	//allenfalls einfacher, wenn wir einen konstanten Gutschein Code verwenden?!
+	public void gutscheinErstellen() {
+		
 	}
 }
