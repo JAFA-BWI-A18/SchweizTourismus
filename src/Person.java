@@ -51,9 +51,8 @@ public class Person implements Serializable {
 //	Mit der folgenden Methode können Veranstalter, Aktivitäten und Veranstaltungen gesucht und angezeigt werden.
 	public void suchen() {
 		// Es werden optionen zur Suche vorgestellt
-		System.out.println("Um einen Veranstalter zu suchen, wählen Sie 1.");
-		System.out.println("Um eine Aktivität zu suchen, wählen Sie 2.");
-		System.out.println("Um eine Veranstaltung zu suchen, wählen Sie 3.");
+		System.out.println(
+				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
 		Scanner scan = new Scanner(System.in);
 		int auswahl1 = scan.nextInt();
 
@@ -86,9 +85,9 @@ public class Person implements Serializable {
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
-			System.out.println("Ihre Auswahl:" + "\n" + veranstalter + "\n" + aktivitaet + "\n" + veranstaltung);
-			
-			
+			System.out.println("Ihre Auswahl:" + "\nVeranstalter: " + veranstalter.getVeranstalter() + "\nAktivität: "
+					+ aktivitaet.getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
+
 		} else if (auswahl1 == 2) {
 			// Alle Aktivitäten werden angezeigt
 			System.out.println("Wählen Sie eine Aktivität aus:");
@@ -110,8 +109,8 @@ public class Person implements Serializable {
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
-			System.out.println("Ihre Auswahl, Veranstalter: " + aktivitaet.getVeranstalter() + "/nAktivität: "
-					+ aktivitaet + "/Veranstaltung: " + veranstaltung);
+			System.out.println("Ihre Auswahl, \nVeranstalter: " + aktivitaet.getVeranstalter().getVeranstalter()
+					+ "\nAktivität: " + aktivitaet.getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
 
 		} else if (auswahl1 == 3) {
 			// Alle Veranstaltungen werden angezeigt
@@ -125,14 +124,38 @@ public class Person implements Serializable {
 			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
-			System.out.println("Ihre Auswahl, Veranstalter: " + veranstaltung.getAktivitaet().getVeranstalter()
-					+ "/nAktivität: " + veranstaltung.getAktivitaet() + "/Veranstaltung: " + veranstaltung);
+			System.out.println("Ihre Auswahl, \nVeranstalter: "
+					+ veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
+					+ veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
 		}
+
+		// Wie soll mit den Angaben aus der Suche weitergefahren werden
+		System.out.println("Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist eine neue Suche starten");
+		int auswahl2 = scan.nextInt();
+		switch (auswahl2) {
+		// Falls 1 ausgewählt wird, wird die Methode Buchen aus der Klasse Kunde
+		// eingeleitet
+		case 1:
+			Kunde kunde = new Kunde();
+			kunde.buchen();
+			break;
+		// Falls 2 ausgewählt wird, wird eine neue Suche eingeleitet
+		case 2:
+			Person person = new Person();
+			person.suchen();
+			break;
+		default:
+			System.out.println("Ihre Auswahl ist ungültig.");
+		}
+
 		scan.close();
 	}
 
-	
+	public void passwortAendern() {
+
+	}
+
 	public void logout() {
-		
+
 	}
 }

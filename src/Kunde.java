@@ -9,6 +9,16 @@ import veranstalter.Veranstaltung;
 
 public class Kunde extends Person {
 
+	private static VeranstalterService service = new VeranstalterService();
+	static {
+		Data.basisVeranstaltung(service);
+	}
+
+	public static void main(String[] args) {
+		Kunde kunde = new Kunde();
+		kunde.bewerten();
+	}
+	
 //	Attribute
 	private String name;
 	private String vorname;
@@ -112,17 +122,7 @@ public class Kunde extends Person {
 		this.erwachsen = erwachsen;
 	}
 
-//	Methoden Kunde
-
-	private static VeranstalterService service = new VeranstalterService();
-	static {
-		Data.basisVeranstaltung(service);
-	}
-
-	public static void main(String[] args) {
-		Kunde kunde = new Kunde();
-		kunde.zahlen();
-	}
+//	Methoden
 
 	// Das Alter des Kundens wird überprüft, um festzustellen ob dieser Erwachsen
 	// oder ein Kind ist
@@ -161,31 +161,101 @@ public class Kunde extends Person {
 		}
 	}
 
-	public void buchen() {
+	public int buchen() {
+		Veranstaltung veranstaltung = new Veranstaltung();
+		Kunde kunde = new Kunde();
+		Person person = new Person();
+		Scanner scan = new Scanner(System.in);
 
+		// TODO Auswahl welche in Methode Suchen getroffen wurde übernehmen
+
+		// Anzahl an gewünschten Teilnehmenden wird angegeben und überprüft ob genug
+		// Plätze vorhanden sind
+		System.out.println("Für wie viele Personen wollen Sie reservieren?");
+		int auswahlAnzahlPlaetze = scan.nextInt();
+		// Wenn genug Plätze vorhanden sind wird der IF-Block ausgeführt
+		if (auswahlAnzahlPlaetze <= veranstaltung.getTotalPlaetze()) {
+			System.out.println(
+					"Es sind genug Plätze verfügbar. \nWollen Sie die Auswahl bezahlen, wählen Sie 1. \nWollen Sie eine andere Anzahl an Personen wählen, wählen Sie 2. \nWollen Sie eine neue Suche starten, wählen Sie 3.");
+			int auswahl = scan.nextInt();
+			switch (auswahl) {
+			// Die Methode Zahlen wird ausgeführt
+			case 1:
+				veranstaltung.setTotalPlaetze(veranstaltung.getTotalPlaetze() - auswahlAnzahlPlaetze);
+				kunde.zahlen();
+				break;
+			// Die gewünschte Personenanzahl kann angepasst werden
+			case 2:
+				kunde.buchen();
+				break;
+			// Die Methode Suchen in Klasse Person wird ausgeführt
+			case 3:
+				person.suchen();
+				break;
+			default:
+				System.out.println("Ihre Auswahl ist ungültig");
+			}
+		}
+		// Wenn nicht genug Plätze vorhanden sind, wird er Else-Block ausgeführt
+		else {
+			System.out.println(
+					"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzhal anzupassen, wählen Sie 1. \nUm eine neue Suche zu starten, wählen Sie 2.");
+			int auswahl1 = scan.nextInt();
+			switch (auswahl1) {
+			// Die Personenanzahl wird angepasst
+			case 1:
+				kunde.buchen();
+				break;
+			// Es wird eine neue Suche gestartet
+			case 2:
+				person.suchen();
+				break;
+			default:
+				System.out.println("Ihre auswahl ist ungültig.");
+			}
+		}
+		scan.close();
+		return auswahlAnzahlPlaetze;
 	}
 
 	public void zahlen() {
-		Veranstaltung veranstaltung = new Veranstaltung(); // TODO nur Veranstaltungen anzeigen, welche man buchen will
+		// TODO Es soll nur Veranstaltungen angezeigt werden, welche man buchen will
+		Veranstaltung veranstaltung = new Veranstaltung();
+		Kunde kunde = new Kunde();
+
 		// Zahlungsdaten werden erfasst
 		Scanner scan = new Scanner(System.in);
+		// TODO Es soll der gesamtpreis angezeigt werden -->
+		// ...+(veranstaltung.getPreis()*auswahlAnzahlPlaetze)+...
 		System.out.println("Der Preis beträgt: " + veranstaltung.getPreis() + "\nBesitzen Sie einen Gutschein?");
-		String eingabeGutscheinvorhanden = scan.next();
+		String eingabeGutscheinVorhanden = scan.next();
 		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
-		if (eingabeGutscheinvorhanden == "ja") { // TODO wieso springt der zur else-Anweisung wenn man ja eingibt?
+		switch (eingabeGutscheinVorhanden) {
+		case "ja":
 			System.out.println("Bitte geben Sie den Code ein:");
 			String eingabeCode = scan.next();
-			if (eingabeCode == "A") { // TODO wieso springt der zur else-Anweisung wenn man den Code eingibt?
+			switch (eingabeCode) {
+			// wenn der Code für einen 10% Gutschein angegeben wird
+			case "A":
 				double preis = veranstaltung.getPreis();
 				preis = preis - (preis * 0.1);
 				System.out.println("Der neue Preis beträgt: " + preis + " CHF.");
-			} else {
+				break;
+			// wenn der Code für einen 5% Gutschein angegeben wird
+			case "B":
+				double preis1 = veranstaltung.getPreis();
+				preis1 = preis1 - (preis1 * 0.05);
+				System.out.println("Der neue Preis beträgt: " + preis1 + " CHF.");
+				break;
+			default:
 				System.out.println("Der Code ist falsch. Der Preis beträgt: " + veranstaltung.getPreis() + " CHF.");
 			}
-		} else {
+			break;
+
+		default:
 			// mach nix
 		}
-
+		// Zahlungsdaten des Kunden werden angegeben
 		System.out.println("Bitte wählen Sie eine Zahlungsmethode aus:");
 		String eingabeZahlungsmethode = scan.next();
 		System.out.println("Bitte geben Sie den Karteninhaber ein:");
@@ -213,23 +283,44 @@ public class Kunde extends Person {
 	}
 
 	public void bewerten() {
-		// Es werden alle Aktivitäten ausgegeben
-		System.out.println("Folgende Aktivitäten stehen zur Verfügung: ");
-		for (int i = 0; i < service.getAktivitaet().size(); i++) {
+		Bewertung bewertung = new Bewertung();
+		// TODO Es werden nur die Aktivitäten ausgegeben, welche man bezahlt und besucht
+		// hat. Momentan werden alle aktivitäten ausgegeben.
+		System.out.println("Folgende Aktivitäten stehen zur Verfügung: \n0 ist keine Bewertung abgeben");
+		for (int i = 1; i < service.getAktivitaet().size(); i++) {
 			System.out.println(i + " ist " + service.getAktivitaet().get(i).getBeschrieb());
 		}
 		System.out.println("Bitte wählen Sie die Aktivität aus, welche sie bewerten möchten:");
 		Scanner scan = new Scanner(System.in);
 		int auswahlAktivitaet = scan.nextInt();
-		Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);
-		// Die Bewertung mit Text und Sternen wird angegeben
-		System.out.println("Geben Sie ihren Text ein:");
-		String bewertungText = scan.next();
-		System.out.println("Geben Sie die Anzahl Sterne an:");
-		int bewertungStern = scan.nextInt();
-
-		Bewertung.bewertungHinzufuegen(aktivitaet, bewertungText, bewertungStern);
-
+		switch (auswahlAktivitaet) {
+		case 0:
+			System.out.println("Sie haben keine Bewertung abgegebeen.");
+			break;
+		default:
+			Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);
+			// Die Bewertung mit Stern wird abgegeben
+			System.out.println("Geben Sie die Anzahl Sterne an:");
+			int bewertungStern = scan.nextInt();
+			System.out.println("Möchten Sie auch einen Bewertungs Text abgeben?");
+			String antwort = scan.next();
+			switch (antwort) {
+			// Falls ein Bewertungstext abgegeben wird, wird am Ende ein 10% Gutschein
+			// erstellt
+			case "ja":
+				System.out.println("Geben Sie ihren Text ein:");
+				String bewertungText = scan.next();
+				Bewertung.bewertungHinzufuegen(aktivitaet, bewertungText, bewertungStern);
+				System.out.println("Danke für Ihre bewertung.");
+				bewertung.gutscheinErstellen10();
+				break;
+			// Falls kein Bewertungstext abgegeben wird, wird am Ende ein 5% Gutschein
+			// erstellt
+			default:
+				System.out.println("Danke für Ihre bewertung.");
+				bewertung.gutscheinErstellen5();
+			}
+		}
 		scan.close();
 	}
 
