@@ -16,6 +16,10 @@ public class Bewertung {
 		this.bewertungText = bewertungText;
 		this.bewertungStern = bewertungStern;
 	}
+	
+	public Bewertung () {
+		
+	}
 
 //	Getters und Setters für definierte Attribute
 	public String getBewertungText() {
@@ -41,7 +45,11 @@ public class Bewertung {
 	
 	//TODO Wenn eine Bewertung abgegeben wurde, wird ein Gutschein erstellt und verschickt.
 	//allenfalls einfacher, wenn wir einen konstanten Gutschein Code verwenden?!
-	public void gutscheinErstellen() {
-		
+	public void gutscheinErstellen10() {
+		System.out.println("Ihr Gutschein-Code lautet: A");
+	}
+	
+	public void gutscheinErstellen5() {
+		System.out.println("Ihr Gutschein-Code lautet: B");
 	}
 }
