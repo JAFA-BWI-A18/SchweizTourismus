@@ -14,8 +14,8 @@ public class Person implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		Person person = new Person();
-		person.suchen();
+		Main main=new Main();			
+		main.kontoErstellen();
 	}
 
 //	Attribute
@@ -51,7 +51,7 @@ public class Person implements Serializable {
 
 //	Mit der folgenden Methode können Veranstalter, Aktivitäten und Veranstaltungen gesucht und angezeigt werden.
 	public void suchen() {
-		Person person=new Person();
+		Person person = new Person();
 		// Es werden optionen zur Suche vorgestellt
 		System.out.println(
 				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
@@ -123,15 +123,17 @@ public class Person implements Serializable {
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = scan.nextInt();
 
-			//Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
+			// Veranstaltung veranstaltung =
+			// service.getVeranstaltung().get(auswahlVeranstaltung);
 			this.veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
-			
+
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl, \nVeranstalter: "
 					+ this.veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
-					+ this.veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: " + this.veranstaltung.getDatum());
-		}else {
-			System.out.println("Ihre Auswahl ist ungültig.");
+					+ this.veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
+					+ this.veranstaltung.getDatum());
+		} else {
+			System.out.println("Ihre Auswahl ist ungültig. Die Suche wird erneut gestartet.");
 			person.suchen();
 		}
 
@@ -152,12 +154,11 @@ public class Person implements Serializable {
 		default:
 			System.out.println("Ihre Auswahl ist ungültig.");
 		}
-
 		scan.close();
 	}
 
 	public void passwortAendern() {
-
+		
 	}
 
 	public void logout() {

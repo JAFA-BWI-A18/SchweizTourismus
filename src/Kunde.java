@@ -14,11 +14,6 @@ public class Kunde extends Person {
 		Data.basisVeranstaltung(service);
 	}
 
-	public static void main(String[] args) {
-		Kunde kunde = new Kunde();
-		kunde.bewerten();
-	}
-	
 //	Attribute
 	private String name;
 	private String vorname;
@@ -126,9 +121,9 @@ public class Kunde extends Person {
 
 	// Das Alter des Kundens wird überprüft, um festzustellen ob dieser Erwachsen
 	// oder ein Kind ist
-	public void pruefungAlter(LocalDate datumHeute, LocalDate geburtstag) {
+	public void pruefungAlter(LocalDate geburtstag) {
 		// Heutiges Datum wird abgefragt
-		datumHeute = LocalDate.now();
+		LocalDate datumHeute = LocalDate.now();
 		// Geburtstag des Kunden wird eingelesen
 		geburtstag = this.geburtstag;
 		if (geburtstag.plusYears(16).isBefore(datumHeute)) {
@@ -148,7 +143,7 @@ public class Kunde extends Person {
 			// Falls dieser älter ist als 16, wird das Attribut erwachsen auf true gesetzt
 			if (geburtstag.plusYears(16).isBefore(datumHeute)) {
 				this.erwachsen = true;
-				System.out.println("Sie sind jetzt erwachsen und können Buchungen und Bewertungen vornehmen.");
+				System.out.println("Sie sind jetzt erwachsen und können Buchungen, Zahlungen und Bewertungen vornehmen.");
 			}
 			// Falls dieser jünger ist als 16, bleibt dieser ein Kind
 			else {
@@ -161,7 +156,7 @@ public class Kunde extends Person {
 		}
 	}
 
-	public int buchen(Veranstaltung VeranstaltungsAuswahl) {
+	public void buchen(Veranstaltung VeranstaltungsAuswahl) {
 		veranstaltung = VeranstaltungsAuswahl;
 		Kunde kunde = new Kunde();
 		Person person = new Person();
@@ -213,17 +208,15 @@ public class Kunde extends Person {
 			}
 		}
 		scan.close();
-		return auswahlAnzahlPlaetze;
 	}
 
 	public void zahlen(Veranstaltung VeranstaltungsAuswahl, int anzahlPlaetze) {
 		veranstaltung = VeranstaltungsAuswahl;
 		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
-		Kunde kunde = new Kunde();
 
-		// Zahlungsdaten werden erfasst
+		// Der Gesamtpreis wird angegeben
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Der Preis beträgt: " + totalPreis + "\nBesitzen Sie einen Gutschein?");
+		System.out.println("Der Preis beträgt: " + totalPreis + " CHF. \nBesitzen Sie einen Gutschein?");
 		String eingabeGutscheinVorhanden = scan.next();
 		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
 		switch (eingabeGutscheinVorhanden) {
@@ -233,21 +226,21 @@ public class Kunde extends Person {
 			switch (eingabeCode) {
 			// wenn der Code für einen 10% Gutschein angegeben wird
 			case "A":
-				totalPreis = totalPreis*0.9;
+				totalPreis = totalPreis * 0.9;
 				System.out.println("Der neue Preis beträgt: " + totalPreis + " CHF.");
 				break;
 			// wenn der Code für einen 5% Gutschein angegeben wird
 			case "B":
-				totalPreis = totalPreis*0.95;
+				totalPreis = totalPreis * 0.95;
 				System.out.println("Der neue Preis beträgt: " + totalPreis + " CHF.");
 				break;
 			default:
-				System.out.println("Der Code ist falsch. Der Preis beträgt: " +totalPreis + " CHF.");
+				System.out.println("Der Code ist falsch. Der Preis beträgt: " + totalPreis + " CHF.");
 			}
 			break;
-
+		// Falls nein angegeben wird, wird nichts ausgeführt, sprich direkt zu den
+		// Zahlungsdaten gegangen.
 		default:
-			// mach nix
 		}
 		// Zahlungsdaten des Kunden werden angegeben
 		System.out.println("Bitte wählen Sie eine Zahlungsmethode aus:");
@@ -255,7 +248,7 @@ public class Kunde extends Person {
 		System.out.println("Bitte geben Sie den Karteninhaber ein:");
 		String eingabeKartenInhaber = scan.next();
 		System.out.println("Bitte geben Sie ihre Kartennummer ein:");
-		String eingabeKartennummer = scan.next();
+		long eingabeKartennummer = scan.nextLong();
 		System.out.println("Bitte geben Sie das Verfallsdatum der Karte ein:");
 		String eingabeVerfallsdatum = scan.next();
 		System.out.println("Bitte geben Sie den CVC-Code ein:");
@@ -317,5 +310,4 @@ public class Kunde extends Person {
 		}
 		scan.close();
 	}
-
 }
