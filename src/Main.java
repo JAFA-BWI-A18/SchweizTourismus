@@ -3,8 +3,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
+
+import javax.swing.text.DateFormatter;
 
 public class Main {
 	public static void main(String[] args) {
@@ -15,8 +22,6 @@ public class Main {
 		admin.main(args);
 		admin.main(args);
 
-		//TODO Hier Login, Konto erfassen und Logout erstellen!
-		
 		// Kunden erfassen
 		List<Kunde> kundelist = Data.getKundenDaten();
 		// Kunden ausgeben
@@ -59,5 +64,96 @@ public class Main {
 		for (Kunde kunde : kundelist2) {
 			System.out.println("Benutzername: " + kunde.getBenutzername() + " Passwort: " + kunde.getPasswort());
 		}
+	}
+
+	public void login() {
+		Scanner scan = new Scanner(System.in);
+		Data data = new Data();
+		// Benutzername und Passwort werden eingegeben
+		System.out.println("Geben Sie ihren Benutzernamen ein:");
+		String eingabeBenutzername = scan.next();
+		System.out.println("Geben Sie ihr Passwort ein:");
+		String eingabePasswort = scan.next();
+
+		// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
+		// man eingeloggt
+		boolean kundeVorhanden = data.getKundenDaten().contains(eingabeBenutzername);
+		boolean passwortVorhanden = data.getKundenDaten().contains(eingabePasswort);
+		// TODO wieso springt dies immer gleich zum Else-Block?
+		if (kundeVorhanden == true) {
+			if (passwortVorhanden == true) {
+				System.out.println("Sie sind nun eingeloggt.");
+			} else {
+				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut.");
+				login();
+			}
+		} else if (passwortVorhanden == true) {
+			if (kundeVorhanden == true) {
+				System.out.println("Sie sind nun eingeloggt.");
+			} else {
+				System.out.println("Ihr Benutzername ist falsch. Biite versuchen Sie es erneut.");
+				login();
+			}
+		}
+		// Falls die EinloggDaten nicht vorhanden sind, wird man gebeten, sich zu
+		// registrtieren.
+		else {
+			System.out.println("Sie sind bei uns noch nicht regististriert. Bitte registrieren Sie sich zuerst.");
+			kontoErstellen();
+		}
+		scan.close();
+	}
+
+	public void kontoErstellen() {
+		Scanner scan = new Scanner(System.in);
+		Kunde kunde = new Kunde();
+		Data data = new Data();
+		// Daten werden abgefragt und eingegeben
+		System.out.println("Bitte geben Sie ihren Vornamen ein:");
+		String eingabeVornamen = scan.next();
+		System.out.println("Bitte geben Sie ihren Nachnamen ein:");
+		String eingabeNachname = scan.next();
+		System.out.println("Bitte geben Sie ihre Adresse ein (ohne Hausnummer):");
+		String eingabeAdresse = scan.next();
+		System.out.println("Bitte geben Sie ihre Hausnummer ein:");
+		String eingabeHausnummer = scan.next();
+		System.out.println("Bitte geben Sie ihre Postleitzahl (PLZ) ein:");
+		int eingabePLZ = scan.nextInt();
+		System.out.println("Bitte geben Sie den Ort ein:");
+		String eingabeOrt = scan.next();
+		System.out.println("Bitte geben Sie ihre E-Mail Adresse ein:");
+		String eingabeMail = scan.next();
+		System.out.println("Bitte geben Sie eine Telefonnummer ein:");
+		long eingabeTelNr = scan.nextLong();
+		System.out.println("Bitte geben Sie ihren Geburtstag ein, im Format dd.mm.yyyy");
+		String eingabeGeburtstag = scan.next();
+		LocalDate geburtstag = LocalDate.parse(eingabeGeburtstag, DateTimeFormatter.ofPattern("dd.MM.uuuu"));
+		System.out.println("Bitte geben Sie einen Benutzernamen ein:");
+		String eingabeBenutzername = scan.next();
+		System.out.println("Bitte geben Sie ein Passwort ein:");
+		String eingabePasswort = scan.next();
+		System.out.println("Sind sie mit den AGBs einverstanden? (ja/nein)");
+		String eingabeAGB = scan.next();
+		switch (eingabeAGB) {
+		case "ja":
+			kunde.setAgb(true);
+			break;
+		case "nein":
+			// TODO passiert irgendwas, wenn man nein zu den ABGs sagt?
+			kunde.setAgb(false);
+			break;
+		default:
+			System.out.println("Ihre Angabe ist ungültig.");
+		}
+		// Das Alter wird überprüft, ob der neu registrierte Kunde erwachsen oder noch
+		// ein Kind ist
+		kunde.pruefungAlter(geburtstag);
+
+		// TODO der neu erfasste Kunde wird der KundenArray hinzugefügt
+
+		// Anschliessend kann man sich einloggen
+		System.out.println("Sie können sich jetzt einloggen.");
+		login();
+		scan.close();
 	}
 }
