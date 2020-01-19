@@ -22,6 +22,7 @@ public class Person implements Serializable {
 
 	private String benutzername;
 	private String passwort;
+	public Veranstaltung veranstaltung = new Veranstaltung();
 
 //	Getters und Setter erstellt
 
@@ -50,6 +51,7 @@ public class Person implements Serializable {
 
 //	Mit der folgenden Methode können Veranstalter, Aktivitäten und Veranstaltungen gesucht und angezeigt werden.
 	public void suchen() {
+		Person person=new Person();
 		// Es werden optionen zur Suche vorgestellt
 		System.out.println(
 				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
@@ -121,12 +123,16 @@ public class Person implements Serializable {
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = scan.nextInt();
 
-			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
-
+			//Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
+			this.veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
+			
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl, \nVeranstalter: "
-					+ veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
-					+ veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
+					+ this.veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
+					+ this.veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: " + this.veranstaltung.getDatum());
+		}else {
+			System.out.println("Ihre Auswahl ist ungültig.");
+			person.suchen();
 		}
 
 		// Wie soll mit den Angaben aus der Suche weitergefahren werden
@@ -137,11 +143,10 @@ public class Person implements Serializable {
 		// eingeleitet
 		case 1:
 			Kunde kunde = new Kunde();
-			kunde.buchen();
+			kunde.buchen(this.veranstaltung);
 			break;
 		// Falls 2 ausgewählt wird, wird eine neue Suche eingeleitet
 		case 2:
-			Person person = new Person();
 			person.suchen();
 			break;
 		default:

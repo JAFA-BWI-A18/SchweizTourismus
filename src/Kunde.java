@@ -161,13 +161,11 @@ public class Kunde extends Person {
 		}
 	}
 
-	public int buchen() {
-		Veranstaltung veranstaltung = new Veranstaltung();
+	public int buchen(Veranstaltung VeranstaltungsAuswahl) {
+		veranstaltung = VeranstaltungsAuswahl;
 		Kunde kunde = new Kunde();
 		Person person = new Person();
 		Scanner scan = new Scanner(System.in);
-
-		// TODO Auswahl welche in Methode Suchen getroffen wurde übernehmen
 
 		// Anzahl an gewünschten Teilnehmenden wird angegeben und überprüft ob genug
 		// Plätze vorhanden sind
@@ -182,11 +180,11 @@ public class Kunde extends Person {
 			// Die Methode Zahlen wird ausgeführt
 			case 1:
 				veranstaltung.setTotalPlaetze(veranstaltung.getTotalPlaetze() - auswahlAnzahlPlaetze);
-				kunde.zahlen();
+				kunde.zahlen(veranstaltung, auswahlAnzahlPlaetze);
 				break;
 			// Die gewünschte Personenanzahl kann angepasst werden
 			case 2:
-				kunde.buchen();
+				kunde.buchen(this.veranstaltung);
 				break;
 			// Die Methode Suchen in Klasse Person wird ausgeführt
 			case 3:
@@ -204,7 +202,7 @@ public class Kunde extends Person {
 			switch (auswahl1) {
 			// Die Personenanzahl wird angepasst
 			case 1:
-				kunde.buchen();
+				kunde.buchen(this.veranstaltung);
 				break;
 			// Es wird eine neue Suche gestartet
 			case 2:
@@ -218,16 +216,14 @@ public class Kunde extends Person {
 		return auswahlAnzahlPlaetze;
 	}
 
-	public void zahlen() {
-		// TODO Es soll nur Veranstaltungen angezeigt werden, welche man buchen will
-		Veranstaltung veranstaltung = new Veranstaltung();
+	public void zahlen(Veranstaltung VeranstaltungsAuswahl, int anzahlPlaetze) {
+		veranstaltung = VeranstaltungsAuswahl;
+		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
 		Kunde kunde = new Kunde();
 
 		// Zahlungsdaten werden erfasst
 		Scanner scan = new Scanner(System.in);
-		// TODO Es soll der gesamtpreis angezeigt werden -->
-		// ...+(veranstaltung.getPreis()*auswahlAnzahlPlaetze)+...
-		System.out.println("Der Preis beträgt: " + veranstaltung.getPreis() + "\nBesitzen Sie einen Gutschein?");
+		System.out.println("Der Preis beträgt: " + totalPreis + "\nBesitzen Sie einen Gutschein?");
 		String eingabeGutscheinVorhanden = scan.next();
 		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
 		switch (eingabeGutscheinVorhanden) {
@@ -237,18 +233,16 @@ public class Kunde extends Person {
 			switch (eingabeCode) {
 			// wenn der Code für einen 10% Gutschein angegeben wird
 			case "A":
-				double preis = veranstaltung.getPreis();
-				preis = preis - (preis * 0.1);
-				System.out.println("Der neue Preis beträgt: " + preis + " CHF.");
+				totalPreis = totalPreis*0.9;
+				System.out.println("Der neue Preis beträgt: " + totalPreis + " CHF.");
 				break;
 			// wenn der Code für einen 5% Gutschein angegeben wird
 			case "B":
-				double preis1 = veranstaltung.getPreis();
-				preis1 = preis1 - (preis1 * 0.05);
-				System.out.println("Der neue Preis beträgt: " + preis1 + " CHF.");
+				totalPreis = totalPreis*0.95;
+				System.out.println("Der neue Preis beträgt: " + totalPreis + " CHF.");
 				break;
 			default:
-				System.out.println("Der Code ist falsch. Der Preis beträgt: " + veranstaltung.getPreis() + " CHF.");
+				System.out.println("Der Code ist falsch. Der Preis beträgt: " +totalPreis + " CHF.");
 			}
 			break;
 
