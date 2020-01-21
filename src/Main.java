@@ -14,8 +14,9 @@ import java.util.Scanner;
 import javax.swing.text.DateFormatter;
 
 public class Main {
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
+		Kunde kunde = new Kunde();
 		// Use Case "Aktivität verwalten" aus Admin-Sicht
 		Admin admin = new Admin();
 		admin.main(args);
@@ -23,23 +24,19 @@ public class Main {
 		admin.main(args);
 
 		// Kunden erfassen
-		List<Kunde> kundelist = Data.getKundenDaten();
-		// Kunden ausgeben
+		List<Kunde> kundelist = Data.getKundenDaten(); // Kundenausgeben
 		List<Kunde> kundelist2 = new ArrayList<Kunde>();
 
 		// Admin erfassen
-		List<Admin> adminlist = new ArrayList<Admin>();
-		// Admin ausgeben
+		List<Admin> adminlist = new ArrayList<Admin>(); // Admin ausgeben
 		List<Admin> adminlist2 = new ArrayList<Admin>();
 
 		// Ein Kundenfile wird angelegt
 		try {
 			FileOutputStream fos = new FileOutputStream("KundeObject.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			// write object to file
+			ObjectOutputStream oos = new ObjectOutputStream(fos); // write object to file
 			oos.writeObject(kundelist);
-			System.out.println("Done");
-			// closing resources
+			System.out.println("Done"); // closing resources
 			oos.close();
 			fos.close();
 		} catch (IOException e) {
@@ -49,26 +46,25 @@ public class Main {
 		// Die Kunden werden ausgelesen und in der Console ausgegeben
 		try {
 			FileInputStream fis = new FileInputStream("KundeObject.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			// write object to file
+			ObjectInputStream ois = new ObjectInputStream(fis); // write object to file
 			kundelist2 = (List<Kunde>) ois.readObject();
-			System.out.println("Done");
-			// closing resources
+			System.out.println("Done"); // closing resources
 			ois.close();
 			fis.close();
-		} catch (IOException | ClassNotFoundException e) {
+		} catch (IOException |
+
+				ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
-		// Die Kunden werden ausgegeben
-		for (Kunde kunde : kundelist2) {
-			System.out.println("Benutzername: " + kunde.getBenutzername() + " Passwort: " + kunde.getPasswort());
-		}
+		// Die Kunden werden ausgegeben for (Kunde kunde : kundelist2) {
+		System.out.println("Benutzername: " + kunde.getBenutzername() + " Passwort: " + kunde.getPasswort());
 	}
 
 	public void login() {
 		Scanner scan = new Scanner(System.in);
 		Data data = new Data();
+
 		// Benutzername und Passwort werden eingegeben
 		System.out.println("Geben Sie ihren Benutzernamen ein:");
 		String eingabeBenutzername = scan.next();
@@ -77,21 +73,24 @@ public class Main {
 
 		// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
 		// man eingeloggt
-		boolean kundeVorhanden = data.getKundenDaten().contains(eingabeBenutzername);
-		boolean passwortVorhanden = data.getKundenDaten().contains(eingabePasswort);
-		// TODO wieso springt dies immer gleich zum Else-Block?
+		ArrayList<Kunde> availbaleClients = data.getKundenDaten();
+		boolean kundeVorhanden = false;
+		boolean passwortVorhanden = false;
+		// Jeder Kunde in der Liste wird überprüft.
+		for (int i = 0; i < availbaleClients.size(); i++) {
+			kundeVorhanden = availbaleClients.get(i).getBenutzername().equals(eingabeBenutzername);
+			// Falls der Kunde vorhanden ist wird der If Block ausgeführt und das Passwort
+			// überprüft
+			if (kundeVorhanden) {
+				passwortVorhanden = availbaleClients.get(i).getPasswort().equals(eingabePasswort);
+				break;
+			}
+		}
 		if (kundeVorhanden == true) {
 			if (passwortVorhanden == true) {
 				System.out.println("Sie sind nun eingeloggt.");
 			} else {
 				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut.");
-				login();
-			}
-		} else if (passwortVorhanden == true) {
-			if (kundeVorhanden == true) {
-				System.out.println("Sie sind nun eingeloggt.");
-			} else {
-				System.out.println("Ihr Benutzername ist falsch. Biite versuchen Sie es erneut.");
 				login();
 			}
 		}
