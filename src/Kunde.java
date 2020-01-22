@@ -311,4 +311,3 @@ public class Kunde extends Person {
 		scan.close();
 	}
 }
-//Test Annika
