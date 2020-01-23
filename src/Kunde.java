@@ -282,7 +282,7 @@ public class Kunde extends Person {
 		int auswahlAktivitaet = scan.nextInt();
 		switch (auswahlAktivitaet) {
 		case 0:
-			System.out.println("Sie haben keine Bewertung abgegebeen.");
+			System.out.println("Sie haben keine Bewertung abgegeben.");
 			break;
 		default:
 			Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);

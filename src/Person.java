@@ -14,8 +14,8 @@ public class Person implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		Main main=new Main();			
-		main.kontoErstellen();
+		Person person = new Person();
+		person.suchen();
 	}
 
 //	Attribute
@@ -123,8 +123,6 @@ public class Person implements Serializable {
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = scan.nextInt();
 
-			// Veranstaltung veranstaltung =
-			// service.getVeranstaltung().get(auswahlVeranstaltung);
 			this.veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
@@ -157,11 +155,7 @@ public class Person implements Serializable {
 		scan.close();
 	}
 
-	public void passwortAendern() {
-		
-	}
-
 	public void logout() {
-
+		System.out.println("Sie sind ausgeloggt.");
 	}
 }
