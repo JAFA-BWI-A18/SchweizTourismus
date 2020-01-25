@@ -26,8 +26,9 @@ public class Main {
 		// Man wird gebeten sich einzuloggen
 		main.login();
 		// loggt man sich als Kunde ein, wird mit dem If-Block weitergefahren
-		boolean angemeldetAlsKunde = true;
-		if (angemeldetAlsKunde == true) {// TODO überprüfung ob man als Kunde angemeldet ist.
+		boolean angemeldetAlsKunde = true; // TODO überprüfung ob man sich beim Login als Kunde angemeldet hat. Dann = true. Und falls als Admin angemeldet = false. @Nico: Wie machen wir das?
+	
+		if (angemeldetAlsKunde == true) {
 			// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
 			// Buchen, Zahlen und bewerten aufgerufen
 			person.suchen();
@@ -55,8 +56,6 @@ public class Main {
 		// loggt man sich als Admin ein, wird der Else-Block ausgeführt
 		else {
 			// Use Case "Aktivität verwalten" aus Admin-Sicht
-			admin.main(args);
-			admin.main(args);
 			admin.main(args);
 
 			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
