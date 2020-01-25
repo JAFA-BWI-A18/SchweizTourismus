@@ -74,8 +74,12 @@ public class Main {
 		// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
 		// man eingeloggt
 		ArrayList<Kunde> availbaleClients = data.getKundenDaten();
+		ArrayList<Admin> availbaleAdmin =data.getAdminDaten();
 		boolean kundeVorhanden = false;
 		boolean passwortVorhanden = false;
+		boolean adminVorhanden=false;
+		boolean adminPasswortVorhanden=false;
+		
 		// Jeder Kunde in der Liste wird überprüft.
 		for (int i = 0; i < availbaleClients.size(); i++) {
 			kundeVorhanden = availbaleClients.get(i).getBenutzername().equals(eingabeBenutzername);
@@ -84,6 +88,14 @@ public class Main {
 			if (kundeVorhanden) {
 				passwortVorhanden = availbaleClients.get(i).getPasswort().equals(eingabePasswort);
 				break;
+			}else {
+				for (int j = 0; j < availbaleAdmin.size(); j++) {
+					adminVorhanden=availbaleAdmin.get(j).getBenutzername().equals(eingabeBenutzername);
+					if (adminVorhanden) {
+						adminPasswortVorhanden=availbaleAdmin.get(j).getPasswort().equals(eingabePasswort);
+						break;
+					}
+				}
 			}
 		}
 		if (kundeVorhanden == true) {
@@ -91,6 +103,13 @@ public class Main {
 				System.out.println("Sie sind nun eingeloggt.");
 			} else {
 				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut.");
+				login();
+			}
+		}else if(adminVorhanden==true){
+			if (adminPasswortVorhanden==true) {
+				System.out.println("Sie sind als Admin eingeloggt.");
+			}else {
+				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut");
 				login();
 			}
 		}

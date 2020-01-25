@@ -39,7 +39,7 @@ public class Data {
 		ArrayList<Admin> admin = new ArrayList<>();
 
 		Admin admin1 = new Admin();
-		admin1.setBenutzername("Schweiz Tourismus");
+		admin1.setBenutzername("SchweizTourismus");
 		admin1.setPasswort("ILoveSwitzerland");
 
 		admin.add(admin1);

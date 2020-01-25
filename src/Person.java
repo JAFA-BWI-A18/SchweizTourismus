@@ -14,8 +14,8 @@ public class Person implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		Person person = new Person();
-		person.suchen();
+		Main main=new Main();
+		main.login();
 	}
 
 //	Attribute
@@ -84,7 +84,7 @@ public class Person implements Serializable {
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = scan.nextInt();
-			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
+			this.veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl:" + "\nVeranstalter: " + veranstalter.getVeranstalter() + "\nAktivität: "
@@ -108,7 +108,7 @@ public class Person implements Serializable {
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = scan.nextInt();
 
-			Veranstaltung veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
+			this.veranstaltung = service.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl, \nVeranstalter: " + aktivitaet.getVeranstalter().getVeranstalter()
