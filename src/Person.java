@@ -44,7 +44,6 @@ public class Person implements Serializable {
 
 //	Konstruktor
 	public Person() {
-		// TODO Auto-generated constructor stub
 	}
 
 //	Methoden
