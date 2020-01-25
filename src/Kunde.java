@@ -26,6 +26,7 @@ public class Kunde extends Person {
 	private boolean agb;
 	private LocalDate geburtstag;
 	private boolean erwachsen = true;
+	private boolean exit;
 
 //	Getters und Setters erstellt
 	public String getName() {
@@ -117,6 +118,14 @@ public class Kunde extends Person {
 		this.erwachsen = erwachsen;
 	}
 
+	public boolean isExit() {
+		return exit;
+	}
+
+	public void setExit(boolean exit) {
+		this.exit = exit;
+	}
+
 //	Methoden
 
 	// Das Alter des Kundens wird überprüft, um festzustellen ob dieser Erwachsen
@@ -170,7 +179,7 @@ public class Kunde extends Person {
 		// Wenn genug Plätze vorhanden sind wird der IF-Block ausgeführt
 		if (auswahlAnzahlPlaetze <= veranstaltung.getTotalPlaetze()) {
 			System.out.println(
-					"Es sind genug Plätze verfügbar. \nWollen Sie die Auswahl bezahlen, wählen Sie 1. \nWollen Sie eine andere Anzahl an Personen wählen, wählen Sie 2. \nWollen Sie eine neue Suche starten, wählen Sie 3.");
+					"Es sind genug Plätze verfügbar. \nWollen Sie die Auswahl bezahlen, wählen Sie 1. \nWollen Sie eine andere Anzahl an Personen wählen, wählen Sie 2. \nWollen Sie eine neue Suche starten, wählen Sie 3. \nWollen Sie sich ausloggen, wählen Sie 4.");
 			int auswahl = scan.nextInt();
 			switch (auswahl) {
 			// Die Methode Zahlen wird ausgeführt
@@ -186,6 +195,11 @@ public class Kunde extends Person {
 			case 3:
 				person.suchen();
 				break;
+			// Die Methode Logout in der Klasse Kunde wird ausgeführt
+			case 4:
+				kunde.logout();
+				setExit(true);
+				break;
 			default:
 				System.out.println("Ihre Auswahl ist ungültig");
 			}
@@ -193,7 +207,7 @@ public class Kunde extends Person {
 		// Wenn nicht genug Plätze vorhanden sind, wird er Else-Block ausgeführt
 		else {
 			System.out.println(
-					"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzhal anzupassen, wählen Sie 1. \nUm eine neue Suche zu starten, wählen Sie 2.");
+					"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzhal anzupassen, wählen Sie 1. \nUm eine neue Suche zu starten, wählen Sie 2. \nUm sich auszuloggen, wählen Sie 3.");
 			int auswahl1 = scan.nextInt();
 			switch (auswahl1) {
 			// Die Personenanzahl wird angepasst
@@ -204,6 +218,9 @@ public class Kunde extends Person {
 			case 2:
 				person.suchen();
 				break;
+			case 3:
+				kunde.logout();
+				setExit(true);
 			default:
 				System.out.println("Ihre auswahl ist ungültig.");
 			}
@@ -212,6 +229,7 @@ public class Kunde extends Person {
 
 	public void zahlen(Veranstaltung VeranstaltungsAuswahl, int anzahlPlaetze) {
 		Kunde kunde = new Kunde();
+		Person person = new Person();
 		veranstaltung = VeranstaltungsAuswahl;
 		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
 
@@ -265,8 +283,22 @@ public class Kunde extends Person {
 			kunde.bewerten(VeranstaltungsAuswahl);
 			break;
 		case "nein":
-			System.out.println("Zahlvorgang abgebrochen.");
+			System.out.println(
+					"Zahlvorgang wurde abgebrochen.\nWollen Sie eine neue Suche starten, wählen Sie 1. \nWollen Sie sich ausloggen, wählen Sie 2.");
+			int eingabe = scan.nextInt();
+			switch (eingabe) {
+			case 1:
+				person.suchen();
+				break;
+			case 2:
+				kunde.logout();
+				setExit(true);
+				break;
+			default:
+				System.out.println("Ihre Auswahl ist ungültig.");
+			}
 		default:
+			System.out.println("Ihre Auswahl ist ungültig.");
 		}
 	}
 

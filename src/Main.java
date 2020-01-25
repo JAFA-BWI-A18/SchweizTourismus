@@ -26,15 +26,18 @@ public class Main {
 		// Man wird gebeten sich einzuloggen
 		main.login();
 		// loggt man sich als Kunde ein, wird mit dem If-Block weitergefahren
-		boolean angemeldetAlsKunde = true; // TODO überprüfung ob man sich beim Login als Kunde angemeldet hat. Dann = true. Und falls als Admin angemeldet = false. @Nico: Wie machen wir das?
-	
+		boolean angemeldetAlsKunde = true; // TODO überprüfung ob man sich beim Login als Kunde angemeldet hat. Dann =
+											// true. Und falls als Admin angemeldet = false. @Nico: Wie machen wir das?
+
 		if (angemeldetAlsKunde == true) {
 			// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
 			// Buchen, Zahlen und bewerten aufgerufen
 			person.suchen();
 			// Wenn die Suche, Buchen, Zahlen und Bewerten abgescholssen ist, wird man vor
 			// die Wahl gestellt, was man als nächstes machen will.
-			boolean exit = false;
+			boolean exit = kunde.isExit(); // TODO wieso wird die Variable Exit auf false gesetzt, obwohl in der Methode
+											// Buchen (Klasse Kunde) die Variable auf true gesetzt wird, und diese
+											// übernommen wird?
 			while (exit == false) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um eine neue Suche zu starten. \nWählen Sie 2, um sich auszuloggen.");
@@ -48,7 +51,7 @@ public class Main {
 					kunde.logout();
 					break;
 				default:
-					System.out.println("Ihre Eingabe ist ungültig.");
+					System.out.println("Ihre Auswahl ist ungültig.");
 				}
 			}
 
@@ -57,10 +60,9 @@ public class Main {
 		else {
 			// Use Case "Aktivität verwalten" aus Admin-Sicht
 			admin.main(args);
-
 			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
-			boolean exit=false;
-			while (exit==false) {
+			boolean exit = false;
+			while (exit == false) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich auszuloggen.");
 				int eingabe = scan.nextInt();
@@ -69,7 +71,7 @@ public class Main {
 					admin.main(args);
 					break;
 				case 2:
-					exit=true;
+					exit = true;
 					kunde.logout();
 					break;
 				default:
@@ -181,36 +183,33 @@ public class Main {
 		String eingabeBenutzername = scan.next();
 		System.out.println("Bitte geben Sie ein Passwort ein:");
 		String eingabePasswort = scan.next();
-		System.out.println("Sind sie mit den AGBs einverstanden? (ja/nein)");
-		String eingabeAGB = scan.next();
-		switch (eingabeAGB) {
-		case "ja":
-			kunde.setAgb(true);
-			break;
-		case "nein":
-			System.out.println("Bitte stimmen Sie den AGBs zu.");
-			eingabeAGB = scan.next();
+		boolean exit = false;
+		while (exit == false) {
+			System.out.println("Sind sie mit den AGBs einverstanden? (ja/nein)");
+			String eingabeAGB = scan.next();
 			switch (eingabeAGB) {
 			case "ja":
+				exit = true;
 				kunde.setAgb(true);
 				break;
+			case "nein":
+				System.out.println("Bitte stimmen Sie den AGBs zu.");
+				break;
 			default:
-				System.out.println("Bitte registrieren Sie sich neu.");
-				kontoErstellen();
+				System.out.println("Ihre Angabe ist ungültig.");
 			}
-			break;
-		default:
-			System.out.println("Ihre Angabe ist ungültig.");
 		}
+
 		// TODO ab hier funktioniert es nicht mehr!
+
 		// Das Alter wird überprüft, ob der neu registrierte Kunde erwachsen oder noch
 		// ein Kind ist
 		kunde.pruefungAlter(geburtstag);
-
+		// TODO der neue kunde wird nicht aufgenommen in die Liste, entsprechend
+		// funktioniert das Login mit den neuen Daten nicht.
 		Kunde neuerKunde = new Kunde();
 		neuerKunde.setBenutzername(eingabeBenutzername);
 		neuerKunde.setPasswort(eingabePasswort);
-
 		ArrayList<Kunde> Kunde = data.getKundenDaten();
 		Kunde.add(neuerKunde);
 

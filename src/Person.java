@@ -14,7 +14,7 @@ public class Person implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		Person person =new Person();
+		Person person = new Person();
 		person.suchen();
 	}
 
@@ -22,6 +22,7 @@ public class Person implements Serializable {
 
 	private String benutzername;
 	private String passwort;
+	private boolean exit;
 	public Veranstaltung veranstaltung = new Veranstaltung();
 
 //	Getters und Setter erstellt
@@ -42,15 +43,25 @@ public class Person implements Serializable {
 		this.passwort = passwort;
 	}
 
+	public boolean isExit() {
+		return exit;
+	}
+
+	public void setExit(boolean exit) {
+		this.exit = exit;
+	}
+
 //	Konstruktor
 	public Person() {
 	}
 
 //	Methoden
 
-//	Mit der folgenden Methode können Veranstalter, Aktivitäten und Veranstaltungen gesucht und angezeigt werden.
+	// Mit der folgenden Methode können Veranstalter, Aktivitäten und
+	// Veranstaltungen gesucht und angezeigt werden.
 	public void suchen() {
 		Person person = new Person();
+		Kunde kunde = new Kunde();
 		// Es werden optionen zur Suche vorgestellt
 		System.out.println(
 				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
@@ -135,13 +146,13 @@ public class Person implements Serializable {
 		}
 
 		// Wie soll mit den Angaben aus der Suche weitergefahren werden
-		System.out.println("Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist eine neue Suche starten");
+		System.out.println(
+				"Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist eine neue Suche starten");
 		int auswahl2 = scan.nextInt();
 		switch (auswahl2) {
 		// Falls 1 ausgewählt wird, wird die Methode Buchen aus der Klasse Kunde
 		// eingeleitet
 		case 1:
-			Kunde kunde = new Kunde();
 			kunde.buchen(this.veranstaltung);
 			break;
 		// Falls 2 ausgewählt wird, wird eine neue Suche eingeleitet
