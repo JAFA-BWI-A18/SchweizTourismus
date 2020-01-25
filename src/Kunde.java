@@ -143,7 +143,8 @@ public class Kunde extends Person {
 			// Falls dieser älter ist als 16, wird das Attribut erwachsen auf true gesetzt
 			if (geburtstag.plusYears(16).isBefore(datumHeute)) {
 				this.erwachsen = true;
-				System.out.println("Sie sind jetzt erwachsen und können Buchungen, Zahlungen und Bewertungen vornehmen.");
+				System.out
+						.println("Sie sind jetzt erwachsen und können Buchungen, Zahlungen und Bewertungen vornehmen.");
 			}
 			// Falls dieser jünger ist als 16, bleibt dieser ein Kind
 			else {
@@ -207,10 +208,10 @@ public class Kunde extends Person {
 				System.out.println("Ihre auswahl ist ungültig.");
 			}
 		}
-		scan.close();
 	}
 
 	public void zahlen(Veranstaltung VeranstaltungsAuswahl, int anzahlPlaetze) {
+		Kunde kunde = new Kunde();
 		veranstaltung = VeranstaltungsAuswahl;
 		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
 
@@ -261,32 +262,25 @@ public class Kunde extends Person {
 		switch (bestaetigung) {
 		case "ja":
 			System.out.println("Bezahlung erfolgreich.");
+			kunde.bewerten(VeranstaltungsAuswahl);
 			break;
 		case "nein":
 			System.out.println("Zahlvorgang abgebrochen.");
 		default:
 		}
-		scan.close();
 	}
 
-	public void bewerten() {
+	public void bewerten(Veranstaltung VeranstaltungsAuswahl) {
+		Kunde kunde = new Kunde();
 		Bewertung bewertung = new Bewertung();
-		// TODO Es werden nur die Aktivitäten ausgegeben, welche man bezahlt und besucht
-		// hat. Momentan werden alle aktivitäten ausgegeben.
-		System.out.println("Folgende Aktivitäten stehen zur Verfügung: \n0 ist keine Bewertung abgeben");
-		for (int i = 1; i < service.getAktivitaet().size(); i++) {
-			System.out.println(i + " ist " + service.getAktivitaet().get(i).getBeschrieb());
-		}
-		System.out.println("Bitte wählen Sie die Aktivität aus, welche sie bewerten möchten:");
+		veranstaltung = VeranstaltungsAuswahl;
+		System.out.println("Folgende Aktivitäten steht zur Bewertung zur Verfügung: "
+				+ this.veranstaltung.getAktivitaet().getBeschrieb()
+				+ ". \nFalls Sie eine Bewertung abgeben wollen, wählen Sie 1. \nFalls Sie keine Bewertung abgeben wollen, wählen Sie 2.");
 		Scanner scan = new Scanner(System.in);
-		int auswahlAktivitaet = scan.nextInt();
-		switch (auswahlAktivitaet) {
-		case 0:
-			System.out.println("Sie haben keine Bewertung abgegeben.");
-			break;
-		default:
-			Aktivitaet aktivitaet = service.getAktivitaet().get(auswahlAktivitaet);
-			// Die Bewertung mit Stern wird abgegeben
+		int auswahl = scan.nextInt();
+		switch (auswahl) {
+		case 1:
 			System.out.println("Geben Sie die Anzahl Sterne an:");
 			int bewertungStern = scan.nextInt();
 			System.out.println("Möchten Sie auch einen Bewertungs Text abgeben?");
@@ -297,7 +291,7 @@ public class Kunde extends Person {
 			case "ja":
 				System.out.println("Geben Sie ihren Text ein:");
 				String bewertungText = scan.next();
-				Bewertung.bewertungHinzufuegen(aktivitaet, bewertungText, bewertungStern);
+				Bewertung.bewertungHinzufuegen(this.veranstaltung.getAktivitaet(), bewertungText, bewertungStern);
 				System.out.println("Danke für Ihre bewertung.");
 				bewertung.gutscheinErstellen10();
 				break;
@@ -307,7 +301,13 @@ public class Kunde extends Person {
 				System.out.println("Danke für Ihre bewertung.");
 				bewertung.gutscheinErstellen5();
 			}
+			break;
+		case 2:
+			System.out.println("Sie haben keine Bewertung abgegeben.");
+			break;
+		default:
+			System.out.println("Ihre auswahl steht nicht zur Verfügung. Bitte wählen Sie eine gültige Auswahl aus.");
+			kunde.bewerten(VeranstaltungsAuswahl);
 		}
-		scan.close();
 	}
 }

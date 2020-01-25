@@ -14,8 +14,8 @@ public class Person implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		Main main=new Main();
-		main.login();
+		Person person =new Person();
+		person.suchen();
 	}
 
 //	Attribute
@@ -152,7 +152,6 @@ public class Person implements Serializable {
 		default:
 			System.out.println("Ihre Auswahl ist ungültig.");
 		}
-		scan.close();
 	}
 
 	public void logout() {

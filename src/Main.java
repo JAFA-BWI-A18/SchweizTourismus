@@ -15,52 +15,72 @@ import javax.swing.text.DateFormatter;
 
 public class Main {
 
+	// Hier findet der ganze Ablauf statt.
 	public static void main(String[] args) {
 		Kunde kunde = new Kunde();
-		// Use Case "Aktivität verwalten" aus Admin-Sicht
 		Admin admin = new Admin();
-		admin.main(args);
-		admin.main(args);
-		admin.main(args);
+		Person person = new Person();
+		Main main = new Main();
+		Scanner scan = new Scanner(System.in);
 
-		// Kunden erfassen
-		List<Kunde> kundelist = Data.getKundenDaten(); // Kundenausgeben
-		List<Kunde> kundelist2 = new ArrayList<Kunde>();
+		// Man wird gebeten sich einzuloggen
+		main.login();
+		// loggt man sich als Kunde ein, wird mit dem If-Block weitergefahren
+		boolean angemeldetAlsKunde = true;
+		if (angemeldetAlsKunde == true) {// TODO überprüfung ob man als Kunde angemeldet ist.
+			// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
+			// Buchen, Zahlen und bewerten aufgerufen
+			person.suchen();
+			// Wenn die Suche, Buchen, Zahlen und Bewerten abgescholssen ist, wird man vor
+			// die Wahl gestellt, was man als nächstes machen will.
+			boolean exit = false;
+			while (exit == false) {
+				System.out.println(
+						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um eine neue Suche zu starten. \nWählen Sie 2, um sich auszuloggen.");
+				int eingabe = scan.nextInt();
+				switch (eingabe) {
+				case 1:
+					person.suchen();
+					break;
+				case 2:
+					exit = true;
+					kunde.logout();
+					break;
+				default:
+					System.out.println("Ihre Eingabe ist ungültig.");
+				}
+			}
 
-		// Admin erfassen
-		List<Admin> adminlist = new ArrayList<Admin>(); // Admin ausgeben
-		List<Admin> adminlist2 = new ArrayList<Admin>();
-
-		// Ein Kundenfile wird angelegt
-		try {
-			FileOutputStream fos = new FileOutputStream("KundeObject.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos); // write object to file
-			oos.writeObject(kundelist);
-			System.out.println("Done"); // closing resources
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+		// loggt man sich als Admin ein, wird der Else-Block ausgeführt
+		else {
+			// Use Case "Aktivität verwalten" aus Admin-Sicht
+			admin.main(args);
+			admin.main(args);
+			admin.main(args);
 
-		// Die Kunden werden ausgelesen und in der Console ausgegeben
-		try {
-			FileInputStream fis = new FileInputStream("KundeObject.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis); // write object to file
-			kundelist2 = (List<Kunde>) ois.readObject();
-			System.out.println("Done"); // closing resources
-			ois.close();
-			fis.close();
-		} catch (IOException |
-
-				ClassNotFoundException e) {
-			e.printStackTrace();
+			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
+			boolean exit=false;
+			while (exit==false) {
+				System.out.println(
+						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich auszuloggen.");
+				int eingabe = scan.nextInt();
+				switch (eingabe) {
+				case 1:
+					admin.main(args);
+					break;
+				case 2:
+					exit=true;
+					kunde.logout();
+					break;
+				default:
+					System.out.println("Ihre Auswahl ist ungültig.");
+				}
+			}
 		}
-
-		// Die Kunden werden ausgegeben for (Kunde kunde : kundelist2) {
-		System.out.println("Benutzername: " + kunde.getBenutzername() + " Passwort: " + kunde.getPasswort());
 	}
 
+//Methoden
 	public void login() {
 		Scanner scan = new Scanner(System.in);
 		Data data = new Data();
@@ -74,12 +94,12 @@ public class Main {
 		// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
 		// man eingeloggt
 		ArrayList<Kunde> availbaleClients = data.getKundenDaten();
-		ArrayList<Admin> availbaleAdmin =data.getAdminDaten();
+		ArrayList<Admin> availbaleAdmin = data.getAdminDaten();
 		boolean kundeVorhanden = false;
 		boolean passwortVorhanden = false;
-		boolean adminVorhanden=false;
-		boolean adminPasswortVorhanden=false;
-		
+		boolean adminVorhanden = false;
+		boolean adminPasswortVorhanden = false;
+
 		// Jeder Kunde in der Liste wird überprüft.
 		for (int i = 0; i < availbaleClients.size(); i++) {
 			kundeVorhanden = availbaleClients.get(i).getBenutzername().equals(eingabeBenutzername);
@@ -88,27 +108,40 @@ public class Main {
 			if (kundeVorhanden) {
 				passwortVorhanden = availbaleClients.get(i).getPasswort().equals(eingabePasswort);
 				break;
-			}else {
+			}
+			// Falls die Eingabe nicht zu einem Kunden gehört, wird sie mit der Adminliste
+			// überprüft
+			else {
 				for (int j = 0; j < availbaleAdmin.size(); j++) {
-					adminVorhanden=availbaleAdmin.get(j).getBenutzername().equals(eingabeBenutzername);
+					adminVorhanden = availbaleAdmin.get(j).getBenutzername().equals(eingabeBenutzername);
 					if (adminVorhanden) {
-						adminPasswortVorhanden=availbaleAdmin.get(j).getPasswort().equals(eingabePasswort);
+						adminPasswortVorhanden = availbaleAdmin.get(j).getPasswort().equals(eingabePasswort);
 						break;
 					}
 				}
 			}
 		}
+		// Falls der Kunde vorhanden ist und die Eingaben korrekt, wir er eingelogt
 		if (kundeVorhanden == true) {
 			if (passwortVorhanden == true) {
 				System.out.println("Sie sind nun eingeloggt.");
-			} else {
+			}
+			// Falls Kunde vorhanden ist, aber das Passwort falsch, wird man gebeten es
+			// erneut zu versuchen
+			else {
 				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut.");
 				login();
 			}
-		}else if(adminVorhanden==true){
-			if (adminPasswortVorhanden==true) {
+		}
+		// Falls es kein Kunde sodern ein Admin ist und die Eingaben korrekt, wird man
+		// als Admin eingeloggt
+		else if (adminVorhanden == true) {
+			if (adminPasswortVorhanden == true) {
 				System.out.println("Sie sind als Admin eingeloggt.");
-			}else {
+			}
+			// Falls Admin vorhanden, aber Passwort falsch, wird man gebeten es erneut zu
+			// versuchen
+			else {
 				System.out.println("Ihr Passwort ist falsch. Bitte versuchen Sie es erneut");
 				login();
 			}
@@ -119,7 +152,6 @@ public class Main {
 			System.out.println("Sie sind bei uns noch nicht regististriert. Bitte registrieren Sie sich zuerst.");
 			kontoErstellen();
 		}
-		scan.close();
 	}
 
 	public void kontoErstellen() {
@@ -157,21 +189,42 @@ public class Main {
 			kunde.setAgb(true);
 			break;
 		case "nein":
-			// TODO passiert irgendwas, wenn man nein zu den ABGs sagt?
-			kunde.setAgb(false);
+			System.out.println("Bitte stimmen Sie den AGBs zu.");
+			eingabeAGB = scan.next();
+			switch (eingabeAGB) {
+			case "ja":
+				kunde.setAgb(true);
+				break;
+			default:
+				System.out.println("Bitte registrieren Sie sich neu.");
+				kontoErstellen();
+			}
 			break;
 		default:
 			System.out.println("Ihre Angabe ist ungültig.");
 		}
+		// TODO ab hier funktioniert es nicht mehr!
 		// Das Alter wird überprüft, ob der neu registrierte Kunde erwachsen oder noch
 		// ein Kind ist
 		kunde.pruefungAlter(geburtstag);
 
-		// TODO der neu erfasste Kunde wird der KundenArray hinzugefügt
+		Kunde neuerKunde = new Kunde();
+		neuerKunde.setBenutzername(eingabeBenutzername);
+		neuerKunde.setPasswort(eingabePasswort);
+
+		ArrayList<Kunde> Kunde = data.getKundenDaten();
+		Kunde.add(neuerKunde);
 
 		// Anschliessend kann man sich einloggen
 		System.out.println("Sie können sich jetzt einloggen.");
 		login();
-		scan.close();
+	}
+
+	public void anmeldungBestaetingung() {
+
+	}
+
+	public void erinnerungBestaetigung() {
+
 	}
 }
