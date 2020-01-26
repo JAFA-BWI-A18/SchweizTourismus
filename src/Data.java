@@ -116,8 +116,8 @@ public class Data {
 	// Admin instanzieren
 	private  void basisAdminDaten() {
 		Admin admin1 = new Admin();
-		admin1.setBenutzername("Test");
-		admin1.setPasswort("Test");
+		admin1.setBenutzername("SchweizTourismus");
+		admin1.setPasswort("ILoveSwitzerland");
 
 		admins.add(admin1);
 	}
