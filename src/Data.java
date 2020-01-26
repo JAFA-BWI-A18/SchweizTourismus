@@ -1,18 +1,99 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import veranstalter.Aktivitaet;
-import veranstalter.Veranstalter;
-import veranstalter.VeranstalterService;
-import veranstalter.Veranstaltung;
+import java.util.List;
+import java.util.Scanner;
 
 //Diese Klasse dient als unsere Datenbank
 public class Data {
+	
+	private static Data instance;
+	
+	private final List<Veranstalter> veranstalter;
+	private final List<Aktivitaet> aktivitaeten;
+	private final List<Veranstaltung> veranstaltungen;
+	private final List<Admin> admins;
+	private final List<Kunde> kunden;
+	
+	private Data() {
+		this.veranstalter = new ArrayList<>();
+		this.aktivitaeten = new ArrayList<>();
+		this.veranstaltungen = new ArrayList<>();
+		this.admins = new ArrayList<>();
+		this.kunden = new ArrayList<>();
+		this.basisVeranstaltung();
+		this.basisKundenDaten();
+		this.basisAdminDaten();
+	}
+	
+	public static Data getInstance() {
+		if(instance == null) {
+			instance = new Data();
+		}
+		return instance;
+	}
+
+	
+	public List<Veranstalter> getVeranstalter(){
+		return veranstalter;
+	}
+	public List<Aktivitaet> getAktivitaet(){
+		return aktivitaeten;
+	}
+	public List<Veranstaltung> getVeranstaltung (){
+		return veranstaltungen;
+	}
+	
+	public List<Kunde> getKundenDaten(){
+		return kunden;
+	}
+	
+	public List<Admin> getAdminDaten() {
+		return admins;
+	}
+	
+	public Veranstalter veranstalterErfassen(String veranstalterStr, String beschreibung) {
+		Veranstalter tmp = new Veranstalter(veranstalterStr, beschreibung);
+		veranstalter.add(tmp);
+		return tmp;
+	}
+
+	public void veranstalterLoeschen(Veranstalter v) {
+		veranstalter.remove(v);
+	}
+
+	public Aktivitaet aktivitaetErfassen(Veranstalter v, String art, String ort, int plz, String beschrieb) {
+		Aktivitaet tmp = new Aktivitaet(art, ort, plz, v, beschrieb);
+		v.aktivitaetHinzufügen(tmp);
+		aktivitaeten.add(tmp);
+		return tmp;
+	}
+
+	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis,
+			int totalPlaetze) {
+		Veranstaltung tmp = new Veranstaltung(a, datum, preis, totalPlaetze);
+		a.veranstaltungHinzufügen(tmp);
+		veranstaltungen.add(tmp);
+		return tmp;
+	}
+	
+	public String bewertungHinzufuegen(Aktivitaet a, String text, int stern) {
+		Bewertung tmp = new Bewertung(text, stern);
+		a.bewertungHinzugügen(tmp);
+		if(tmp.getBewertungText() != null && !tmp.getBewertungText().isBlank()) {
+			return "A";	
+		}
+		return "B";
+
+	}
+	
+	public void kundenHinzufuegen(Kunde kunde) {
+		this.kunden.add(kunde);
+	}
+
 
 	// Kunden instanzieren
-	public static ArrayList<Kunde> getKundenDaten() {
-		ArrayList<Kunde> kunden = new ArrayList<>();
-
+	private void basisKundenDaten() {
+	
 		Kunde kunde1 = new Kunde();
 		kunde1.setBenutzername("Amina");
 		kunde1.setPasswort("ILoveHWZ");
@@ -30,12 +111,10 @@ public class Data {
 		kunde3.setPasswort("ILoveJava");
 
 		kunden.add(kunde3);
-
-		return kunden;
 	}
 
 	// Admin instanzieren
-	public static ArrayList<Admin> getAdminDaten() {
+	private  void basisAdminDaten() {
 		ArrayList<Admin> admin = new ArrayList<>();
 
 		Admin admin1 = new Admin();
@@ -43,87 +122,85 @@ public class Data {
 		admin1.setPasswort("ILoveSwitzerland");
 
 		admin.add(admin1);
-
-		return admin;
 	}
 
 	// Basis Veranstalter / Aktivitäten / Veranstaltungen instanzieren
-	public static void basisVeranstaltung(VeranstalterService service) {
+	private void basisVeranstaltung() {
 		// Veranstalter OAF
-		Veranstalter oaf = service.veranstalterErfassen("Open Air Frauenfeld", "bla bla");
+		Veranstalter oaf = veranstalterErfassen("Open Air Frauenfeld", "bla bla");
 
 		// Aktivität Tageseintritt für OAF
-		Aktivitaet eintritt = service.aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500,
+		Aktivitaet eintritt = aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500,
 				"Eintritt zum groessten Festival");
 
 		// Veranstaltung Tag 1 für Eintritt am OAF
-		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50);
+		veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50);
 
 		// Bewertung der Veranstaltung Eintritt Tag 1
-		service.bewertungHinzufuegen(eintritt, "Geil", 5);
-		service.bewertungHinzufuegen(eintritt, "Hammer", 5);
-		service.bewertungHinzufuegen(eintritt, "Nice", 4);
+		bewertungHinzufuegen(eintritt, "Geil", 5);
+		bewertungHinzufuegen(eintritt, "Hammer", 5);
+		bewertungHinzufuegen(eintritt, "Nice", 4);
 
 		// Veranstaltung Tag 2 für Eintritt am OAF
-		service.veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30);
+		veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 10, 14, 00), 200, 30);
 
 		// Bewertung der Veranstaltung Eintritt Tag 2
-		service.bewertungHinzufuegen(eintritt, "Jedes Jahr wieder", 5);
-		service.bewertungHinzufuegen(eintritt, "Danke, mega toll", 5);
-		service.bewertungHinzufuegen(eintritt, "Schlimm", 1);
+		bewertungHinzufuegen(eintritt, "Jedes Jahr wieder", 5);
+		bewertungHinzufuegen(eintritt, "Danke, mega toll", 5);
+		bewertungHinzufuegen(eintritt, "Schlimm", 1);
 
 		// Aktivität Übernachtung für OAF
-		Aktivitaet uebernachtung = service.aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500, "Camping Upgrade");
+		Aktivitaet uebernachtung = aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500, "Camping Upgrade");
 
 		// Veranstaltung Nacht 1 für Übernachtung am OAF
-		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 100, 100);
+		veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 9, 14, 00), 100, 100);
 
 		// Bewertung der Veranstaltung Übernachtung Nacht1
-		service.bewertungHinzufuegen(uebernachtung, "Mega bequem", 5);
-		service.bewertungHinzufuegen(uebernachtung, "Schmutzig", 2);
+		bewertungHinzufuegen(uebernachtung, "Mega bequem", 5);
+		bewertungHinzufuegen(uebernachtung, "Schmutzig", 2);
 
 		// Veranstaltung Nacht 2 für Übernachtung am OAF
-		service.veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50, 50);
+		veranstaltungErfassen(uebernachtung, LocalDateTime.of(2020, 7, 10, 14, 00), 50, 50);
 
 		// Bewertung der Veranstaltung Übernachtung Nacht2
-		service.bewertungHinzufuegen(uebernachtung, "Toll", 5);
-		service.bewertungHinzufuegen(uebernachtung, "Nie wider", 1);
-		service.bewertungHinzufuegen(uebernachtung, "Schlimm", 1);
+		bewertungHinzufuegen(uebernachtung, "Toll", 5);
+		bewertungHinzufuegen(uebernachtung, "Nie wider", 1);
+		bewertungHinzufuegen(uebernachtung, "Schlimm", 1);
 
 		// Veranstalter Alpamare
-		Veranstalter alpamare = service.veranstalterErfassen("Alpamare", "bla bla");
+		Veranstalter alpamare = veranstalterErfassen("Alpamare", "bla bla");
 
 		// Aktivität Wellness
-		Aktivitaet wellness = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Wellnes im Alpamare");
+		Aktivitaet wellness = aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Wellnes im Alpamare");
 
 		// Veranstaltung Tag 1 für Wellness im Alpamare
-		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 8, 13, 14, 00), 20, 15);
+		veranstaltungErfassen(wellness, LocalDateTime.of(2020, 8, 13, 14, 00), 20, 15);
 
 		// Bewertung Tag 1 Wellness im Alpamare
-		service.bewertungHinzufuegen(wellness, "Toll, aber..", 4);
+		bewertungHinzufuegen(wellness, "Toll, aber..", 4);
 
 		// Veranstaltung Tag 2 für Wellness im Alpamare
-		service.veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20);
+		veranstaltungErfassen(wellness, LocalDateTime.of(2020, 7, 10, 14, 00), 20, 20);
 
 		// Bewertung Tag 2 Wellness im Alpamare
-		service.bewertungHinzufuegen(wellness, "Super", 5);
+		bewertungHinzufuegen(wellness, "Super", 5);
 
 		// Aktivität Rutschbahnen
-		Aktivitaet rutschbahnen = service.aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Tolles Rutscherlebnis");
+		Aktivitaet rutschbahnen = aktivitaetErfassen(alpamare, "Indoor", "Freienbach", 8807, "Tolles Rutscherlebnis");
 
 		// Veranstaltung Tag 1 für Rutschbahnen im Alpamare
-		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20);
+		veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 7, 22, 10, 00), 15, 20);
 
 		// Bewertung Tag 1 Rutschbahnen im Alpamare
-		service.bewertungHinzufuegen(rutschbahnen, "Sensationell", 5);
-		service.bewertungHinzufuegen(rutschbahnen, "Schlecht", 1);
+		bewertungHinzufuegen(rutschbahnen, "Sensationell", 5);
+		bewertungHinzufuegen(rutschbahnen, "Schlecht", 1);
 
 		// Veranstaltung Tag 2 für Rutschbahnen im Alpamare
-		service.veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15);
+		veranstaltungErfassen(rutschbahnen, LocalDateTime.of(2020, 10, 28, 10, 00), 17, 15);
 
 		// Bewertung Tag 2 Rutschbahnen im Alpamare
-		service.bewertungHinzufuegen(rutschbahnen, "ok", 3);
-		service.bewertungHinzufuegen(rutschbahnen, "Nice", 5);
+		bewertungHinzufuegen(rutschbahnen, "ok", 3);
+		bewertungHinzufuegen(rutschbahnen, "Nice", 5);
 	}
 
 }

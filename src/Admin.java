@@ -2,27 +2,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import veranstalter.Aktivitaet;
-import veranstalter.Veranstalter;
-import veranstalter.VeranstalterService;
-
 public class Admin extends Person {
 
-	private static VeranstalterService service = new VeranstalterService();
-	static {
-		Data.basisVeranstaltung(service);
-	}
+	public void inputStart() {
 
-	public static void main(String[] args) {
-
+		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte gewünschte Aktion wählen: \n1 Neuen Veranstalter erfassen"
 				+ "\n2 Bestehenden Veranstalter bearbeiten" + "\n3 Veranstalter löschen"
 				+ "\n4 Neue Veranstaltung erfassen" + "\n5 Bestehenden Veranstaltung bearbeiten"
 				+ "\n6 Veranstaltung löschen" + "\n7 Neue Aktivität erfassen" + "\n8 Bestehende Aktivität bearbeiten"
 				+ "\n9 Aktivität löschen");
-		Scanner scan = new Scanner(System.in);
-		String zahl = scan.nextLine().trim();
-
+		String zahl = scan.next().trim();
+	
 		switch (zahl) {
 		case "1":
 			veranstalterErfassenInput();
@@ -35,77 +26,77 @@ public class Admin extends Person {
 		case "7":
 			veranstaltungErfassenInput();
 			break;
-
 		default:
 			System.out.println("Bitte überprüfen Sie Ihre Angaben.");
 		}
+
 	}
 
 	// Neuen Veranstalter erfassen Vorführen
-	private static void veranstalterErfassenInput() {
+	private void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter-Namen erfassen: ");
-		String veranstalterName = scan.nextLine().trim();
+		String veranstalterName = scan.next().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
-		String veranstalterBeschrieb = scan.nextLine().trim();
-
-		// Neuen Veranstalter erfassen Code:
+		String veranstalterBeschrieb = scan.next().trim();
+			// Neuen Veranstalter erfassen Code:
 		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
-		service.getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
+		Data.getInstance().getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Neue Aktivität erfassen Vorführen
-	private static void aktivitaetErfassenInput() {
+	private void aktivitaetErfassenInput() {
 		Scanner scan = new Scanner(System.in);
+		Data data = Data.getInstance();
 		System.out.println("Bitte Veranstalter wählen: ");
-		for (int i = 0; i < service.getVeranstalter().size(); i++) {
-			System.out.println(i + ". " + service.getVeranstalter().get(i).getVeranstalter());
+		for (int i = 0; i < data.getVeranstalter().size(); i++) {
+			System.out.println(i + ". " + data.getVeranstalter().get(i).getVeranstalter());
 		}
-		int aktVeranstalter = Integer.valueOf(scan.nextLine().trim());
+		int aktVeranstalter = Integer.valueOf(scan.next().trim());
 		System.out.println("Bitte Aktivitäts-Beschrieb erfassen: ");
-		String aktBeschrieb = scan.nextLine().trim();
+		String aktBeschrieb = scan.next().trim();
 		System.out.println("Bitte Aktivitäts-Art erfassen: ");
-		String aktArt = scan.nextLine().trim();
+		String aktArt = scan.next().trim();
 		System.out.println("Bitte Aktivitäts-Ort erfassen: ");
-		String aktOrt = scan.nextLine().trim();
+		String aktOrt = scan.next().trim();
 		System.out.println("Bitte Aktivitäts-PLZ erfassen: ");
-		int aktPLZ = Integer.valueOf(scan.nextLine().trim());
-
+		int aktPLZ = Integer.valueOf(scan.next().trim());
 		// Neue Aktivtität erfassen Code:
-		aktErfassen(service.getVeranstalter().get(aktVeranstalter), aktBeschrieb, aktArt, aktOrt, aktPLZ);
-		service.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
+		aktErfassen(data.getVeranstalter().get(aktVeranstalter), aktBeschrieb, aktArt, aktOrt, aktPLZ);
+		data.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Neuen Veranstaltung erfassen Vorführen
-	private static void veranstaltungErfassenInput() {
+	private void veranstaltungErfassenInput() {
 		Scanner scan = new Scanner(System.in);
+		Data data = Data.getInstance();
 		System.out.println("Bitte Aktivität wählen: ");
-		for (int i = 0; i < service.getAktivitaet().size(); i++) {
-			System.out.println(i + ". " + service.getAktivitaet().get(i).getVeranstalter().getVeranstalter() + " - "
-					+ service.getAktivitaet().get(i).getBeschrieb());
+		for (int i = 0; i < data.getAktivitaet().size(); i++) {
+			System.out.println(i + ". " + data.getAktivitaet().get(i).getVeranstalter().getVeranstalter() + " - "
+					+ data.getAktivitaet().get(i).getBeschrieb());
 		}
-		int veranstaltungsAktivitaet = Integer.valueOf(scan.nextLine().trim());
+		int veranstaltungsAktivitaet = Integer.valueOf(scan.next().trim());
 		System.out.println("Bitte Veranstaltungs-Datum erfassen (Format: DD.MM.YYYY): ");
-		String veranstaltungsDatum = scan.nextLine().trim();
+		String veranstaltungsDatum = scan.next().trim();
 		System.out.println("Bitte Veranstaltungs-Zeit erfassen (Format; HH:MM): ");
-		String veranstaltungsZeit = scan.nextLine().trim();
+		String veranstaltungsZeit = scan.next().trim();
 		System.out.println("Bitte Veranstaltungs-Preis erfassen: ");
-		double veranstaltungsPreis = Double.valueOf(scan.nextLine().trim());
+		double veranstaltungsPreis = Double.valueOf(scan.next().trim());
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
-		int veranstaltungsPlaetze = Integer.valueOf(scan.nextLine().trim());
+		int veranstaltungsPlaetze = Integer.valueOf(scan.next().trim());
 
 		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum + " " + veranstaltungsZeit,
-				DateTimeFormatter.ofPattern("dd.MM.uuuu HH:mm"));
+				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
 
 		// Neuen Veranstaltung erfassen Code:
-		veranstaltungErfassen(service.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
+		veranstaltungErfassen(data.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
 				veranstaltungsPlaetze);
-		service.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
+		data.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Weitere Methoden
-	public static void veranstalterErfassen(String veranstalter, String beschreibung) {
-		service.veranstalterErfassen(veranstalter, beschreibung);
+	public void veranstalterErfassen(String veranstalter, String beschreibung) {
+		Data.getInstance().veranstalterErfassen(veranstalter, beschreibung);
 	}
 
 	public void veranstalterEditieren(String veranstalter, String beschreibung) {
@@ -115,7 +106,7 @@ public class Admin extends Person {
 	}
 
 	public static void veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis, int totalePlaetze) {
-		service.veranstaltungErfassen(a, datum, preis, totalePlaetze);
+		Data.getInstance().veranstaltungErfassen(a, datum, preis, totalePlaetze);
 	}
 
 	public void veranstaltungEditieren(Aktivitaet a, LocalDateTime datum, double preis, int totalePlaetze) {
@@ -125,7 +116,7 @@ public class Admin extends Person {
 	}
 
 	public static void aktErfassen(Veranstalter veranstalter, String beschreibung, String art, String ort, int plz) {
-		service.aktivitaetErfassen(veranstalter, art, ort, plz, beschreibung);
+		Data.getInstance().aktivitaetErfassen(veranstalter, art, ort, plz, beschreibung);
 	}
 
 	public void aktEditieren(Veranstalter veranstalter, String beschreibung, String art, String ort, int plz) {
