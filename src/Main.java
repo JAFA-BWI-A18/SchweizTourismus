@@ -58,19 +58,20 @@ public class Main {
 		}
 		else if(user instanceof Admin) {
 			Admin admin = (Admin) user;
-			// Use Case "Aktivität verwalten" aus Admin-Sicht
-			admin.inputStart();
 			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
 			boolean exit = false;
 			while (!exit) {
 				System.out.println(
-						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich auszuloggen.");
+						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich eine Veranstaltung zu suchen.\nWählen Sie 3, um sich auszuloggen.");
 				int eingabe = Integer.valueOf(scan.next().trim());
 				switch (eingabe) {
 				case 1:
 					admin.inputStart();
 					break;
 				case 2:
+					admin.suchen();
+				 break;
+				case 3:
 					admin.logout();
 					exit = true;
 					break;

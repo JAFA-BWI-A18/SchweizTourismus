@@ -115,13 +115,11 @@ public class Data {
 
 	// Admin instanzieren
 	private  void basisAdminDaten() {
-		ArrayList<Admin> admin = new ArrayList<>();
-
 		Admin admin1 = new Admin();
 		admin1.setBenutzername("SchweizTourismus");
 		admin1.setPasswort("ILoveSwitzerland");
 
-		admin.add(admin1);
+		admins.add(admin1);
 	}
 
 	// Basis Veranstalter / Aktivitäten / Veranstaltungen instanzieren

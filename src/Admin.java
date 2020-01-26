@@ -41,7 +41,7 @@ public class Admin extends Person {
 		String veranstalterBeschrieb = scan.next().trim();
 			// Neuen Veranstalter erfassen Code:
 		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
-		Data.getInstance().getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
+		//Data.getInstance().getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Neue Aktivität erfassen Vorführen
@@ -63,7 +63,7 @@ public class Admin extends Person {
 		int aktPLZ = Integer.valueOf(scan.next().trim());
 		// Neue Aktivtität erfassen Code:
 		aktErfassen(data.getVeranstalter().get(aktVeranstalter), aktBeschrieb, aktArt, aktOrt, aktPLZ);
-		data.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
+		//data.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Neuen Veranstaltung erfassen Vorführen
@@ -78,7 +78,7 @@ public class Admin extends Person {
 		int veranstaltungsAktivitaet = Integer.valueOf(scan.next().trim());
 		System.out.println("Bitte Veranstaltungs-Datum erfassen (Format: DD.MM.YYYY): ");
 		String veranstaltungsDatum = scan.next().trim();
-		System.out.println("Bitte Veranstaltungs-Zeit erfassen (Format; HH:MM): ");
+		System.out.println("Bitte Veranstaltungs-Zeit erfassen (Format: HH:MM): ");
 		String veranstaltungsZeit = scan.next().trim();
 		System.out.println("Bitte Veranstaltungs-Preis erfassen: ");
 		double veranstaltungsPreis = Double.valueOf(scan.next().trim());
@@ -91,7 +91,7 @@ public class Admin extends Person {
 		// Neuen Veranstaltung erfassen Code:
 		veranstaltungErfassen(data.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
 				veranstaltungsPlaetze);
-		data.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
+		//data.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
 	// Weitere Methoden

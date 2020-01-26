@@ -71,14 +71,14 @@ public class Person {
 			int auswahlAktivitaet = Integer.valueOf(scan.next().trim());
 
 			// Alle Veranstaltungen der oben gewünschten Aktivität werden angezeigt
-			Aktivitaet aktivitaet = data.getAktivitaet().get(auswahlAktivitaet);
+			Aktivitaet aktivitaet = veranstalter.getAktivitaeten().get(auswahlAktivitaet);
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
 			for (int i = 0; i < aktivitaet.getVeranstaltungen().size(); i++) {
 				System.out.println(i + " ist " + aktivitaet.getVeranstaltungen().get(i).getDatum());
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = Integer.valueOf(scan.next().trim());
-			veranstaltung = data.getVeranstaltung().get(auswahlVeranstaltung);
+			veranstaltung = aktivitaet.getVeranstaltungen().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl:" + "\nVeranstalter: " + veranstalter.getVeranstalter() + "\nAktivität: "
@@ -101,8 +101,7 @@ public class Person {
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = Integer.valueOf(scan.next().trim());
-
-			veranstaltung = data.getVeranstaltung().get(auswahlVeranstaltung);
+			veranstaltung = aktivitaet.getVeranstaltungen().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
 			System.out.println("Ihre Auswahl, \nVeranstalter: " + aktivitaet.getVeranstalter().getVeranstalter()
