@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Person {
@@ -49,7 +50,7 @@ public class Person {
 		// Es werden optionen zur Suche vorgestellt
 		System.out.println(
 				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
-		int auswahl1 = Integer.valueOf(scan.next().trim());
+		int auswahl1 = Integer.valueOf(scan.nextLine().trim());
 
 		if (auswahl1 == 1) {
 			// Alle Veranstalter werden angezeigt
@@ -58,7 +59,7 @@ public class Person {
 				System.out.println(i + " ist " + data.getVeranstalter().get(i).getVeranstalter());
 			}
 			// Der gewünschte Veranstalter wird ausgesucht und mit einer Zahl angegeben
-			int auswahlVeranstalter = Integer.valueOf(scan.next().trim());
+			int auswahlVeranstalter = Integer.valueOf(scan.nextLine().trim());
 			;
 
 			// Alle Aktivitäten des oben gewünschten Veranstalters werden angezeigt
@@ -68,53 +69,65 @@ public class Person {
 				System.out.println(i + " ist " + veranstalter.getAktivitaeten().get(i).getBeschrieb());
 			}
 			// Die gewünschte Aktivität wird ausgesucht und mit einer Zahl angegeben
-			int auswahlAktivitaet = Integer.valueOf(scan.next().trim());
+			int auswahlAktivitaet = Integer.valueOf(scan.nextLine().trim());
 
 			// Alle Veranstaltungen der oben gewünschten Aktivität werden angezeigt
 			Aktivitaet aktivitaet = veranstalter.getAktivitaeten().get(auswahlAktivitaet);
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
 			for (int i = 0; i < aktivitaet.getVeranstaltungen().size(); i++) {
-				System.out.println(i + " ist " + aktivitaet.getVeranstaltungen().get(i).getDatum());
+				System.out.println(i + " ist " + aktivitaet.getVeranstaltungen().get(i).getDatum()
+						.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
-			int auswahlVeranstaltung = Integer.valueOf(scan.next().trim());
+			int auswahlVeranstaltung = Integer.valueOf(scan.nextLine().trim());
 			veranstaltung = aktivitaet.getVeranstaltungen().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
-			System.out.println("Ihre Auswahl:" + "\nVeranstalter: " + veranstalter.getVeranstalter() + "\nAktivität: "
-					+ aktivitaet.getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
+			System.out.println("Ihre Auswahl:" + "\nVeranstalter: "
+					+ veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
+					+ veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
+					+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
 		} else if (auswahl1 == 2) {
 			// Alle Aktivitäten werden angezeigt
 			System.out.println("Wählen Sie eine Aktivität aus:");
 			for (int i = 0; i < data.getAktivitaet().size(); i++) {
-				System.out.println(i + " ist " + data.getAktivitaet().get(i).getBeschrieb());
+				System.out.println(i + " ist " + data.getAktivitaet().get(i).getVeranstalter().getVeranstalter() + " - "
+						+ data.getAktivitaet().get(i).getBeschrieb());
 			}
 			// Die gewünschte Aktivität wird ausgesucht und mit einer Zahl angegeben
-			int auswahlAktivitaet = Integer.valueOf(scan.next().trim());
+			int auswahlAktivitaet = Integer.valueOf(scan.nextLine().trim());
 
 			// Alle Veranstaltungen werden angegeben von der obigen Aktivität
 			Aktivitaet aktivitaet = data.getAktivitaet().get(auswahlAktivitaet);
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
 			for (int i = 0; i < aktivitaet.getVeranstaltungen().size(); i++) {
-				System.out.println(i + " ist " + aktivitaet.getVeranstaltungen().get(i).getDatum());
+				System.out.println(i + " ist " + aktivitaet.getVeranstaltungen().get(i).getDatum()
+						.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
-			int auswahlVeranstaltung = Integer.valueOf(scan.next().trim());
+			int auswahlVeranstaltung = Integer.valueOf(scan.nextLine().trim());
 			veranstaltung = aktivitaet.getVeranstaltungen().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben
-			System.out.println("Ihre Auswahl, \nVeranstalter: " + aktivitaet.getVeranstalter().getVeranstalter()
-					+ "\nAktivität: " + aktivitaet.getBeschrieb() + "\nVeranstaltung: " + veranstaltung.getDatum());
+			System.out.println(
+					"Ihre Auswahl, \nVeranstalter: " + veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter()
+							+ "\nAktivität: " + veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
+							+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
 		} else if (auswahl1 == 3) {
 			// Alle Veranstaltungen werden angezeigt
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
 			for (int i = 0; i < data.getVeranstaltung().size(); i++) {
-				System.out.println(i + " ist " + data.getVeranstaltung().get(i).getDatum());
+
+				System.out.println(
+						i + " ist " + data.getVeranstaltung().get(i).getAktivitaet().getVeranstalter().getVeranstalter()
+								+ " - " + data.getVeranstaltung().get(i).getAktivitaet().getBeschrieb() + " - "
+								+ data.getVeranstaltung().get(i).getDatum()
+										.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
-			int auswahlVeranstaltung = Integer.valueOf(scan.next().trim());
+			int auswahlVeranstaltung = Integer.valueOf(scan.nextLine().trim());
 
 			veranstaltung = data.getVeranstaltung().get(auswahlVeranstaltung);
 

@@ -22,7 +22,7 @@ public class Main {
 			while(!exit) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um eine Suche zu starten. \nWählen Sie 2, um sich auszuloggen.");
-				int eingabe = Integer.valueOf(scan.next().trim());
+				int eingabe = Integer.valueOf(scan.nextLine().trim());
 				switch (eingabe) {
 				case 1:
 					Veranstaltung veranstaltung = kunde.suchen();
@@ -30,7 +30,7 @@ public class Main {
 						if(kunde.isErwachsen()) {
 							// Wie soll mit den Angaben aus der Suche weitergefahren werden
 							System.out.println("Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist zurück zum Hauptmenu");
-							int auswahl2 = Integer.valueOf(scan.next().trim());
+							int auswahl2 = Integer.valueOf(scan.nextLine().trim());
 							switch (auswahl2) {
 							// Falls 1 ausgewählt wird, wird die Methode Buchen aus der Klasse Kunde
 							// eingeleitet
@@ -63,7 +63,7 @@ public class Main {
 			while (!exit) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich eine Veranstaltung zu suchen.\nWählen Sie 3, um sich auszuloggen.");
-				int eingabe = Integer.valueOf(scan.next().trim());
+				int eingabe = Integer.valueOf(scan.nextLine().trim());
 				switch (eingabe) {
 				case 1:
 					admin.inputStart();
@@ -90,9 +90,9 @@ public class Main {
 		while(!exit) {
 			// Benutzername und Passwort werden eingegeben
 			System.out.println("Geben Sie ihren Benutzernamen ein:");
-			String eingabeBenutzername = scan.next().trim();
+			String eingabeBenutzername = scan.nextLine().trim();
 			System.out.println("Geben Sie ihr Passwort ein:");
-			String eingabePasswort = scan.next().trim();
+			String eingabePasswort = scan.nextLine().trim();
 	
 			// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
 			// man eingeloggt
@@ -117,7 +117,7 @@ public class Main {
 			}
 			System.out.println("Ihr Benutzername oder Passwort ist falsch.\n"+
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um es nochmals zu versuchen. \nWählen Sie 2, um einen neuen Benutzer anzulegen. \nWählen Sie 3, um den Vorgang abzubrechen.");
-			int auswahl1 = Integer.valueOf(scan.next().trim());
+			int auswahl1 = Integer.valueOf(scan.nextLine().trim());
 			switch(auswahl1) {
 				case 1:
 					 break;
@@ -139,32 +139,32 @@ public class Main {
 		Data data = Data.getInstance();
 		// Daten werden abgefragt und eingegeben
 		System.out.println("Bitte geben Sie ihren Vornamen ein:");
-		String eingabeVornamen = scan.next().trim();
+		String eingabeVornamen = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihren Nachnamen ein:");
-		String eingabeNachname = scan.next().trim();
+		String eingabeNachname = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihre Adresse ein (ohne Hausnummer):");
-		String eingabeAdresse = scan.next().trim();
+		String eingabeAdresse = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihre Hausnummer ein:");
-		String eingabeHausnummer = scan.next().trim();
+		String eingabeHausnummer = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihre Postleitzahl (PLZ) ein:");
-		int eingabePLZ = Integer.valueOf(scan.next().trim());
+		int eingabePLZ = Integer.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte geben Sie den Ort ein:");
-		String eingabeOrt = scan.next().trim();
+		String eingabeOrt = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihre E-Mail Adresse ein:");
-		String eingabeMail = scan.next().trim();
+		String eingabeMail = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie eine Telefonnummer ein:");
-		String eingabeTelNr = scan.next().trim();
+		String eingabeTelNr = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihren Geburtstag ein, im Format dd.mm.yyyy");
-		String eingabeGeburtstag = scan.next();
+		String eingabeGeburtstag = scan.nextLine();
 		LocalDate geburtstag = LocalDate.parse(eingabeGeburtstag, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 		System.out.println("Bitte geben Sie einen Benutzernamen ein:");
-		String eingabeBenutzername = scan.next().trim();
+		String eingabeBenutzername = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ein Passwort ein:");
-		String eingabePasswort = scan.next().trim();
+		String eingabePasswort = scan.nextLine().trim();
 		boolean agb = false;
 		while (!agb) {
 			System.out.println("Sind sie mit den AGBs einverstanden? (ja/nein) Falls Sie die AGB ablehnen, wird die Konto erstellung abgebrochen");
-			String eingabeAGB = scan.next().trim();
+			String eingabeAGB = scan.nextLine().trim();
 			switch (eingabeAGB) {
 			case "ja":
 				agb= true;

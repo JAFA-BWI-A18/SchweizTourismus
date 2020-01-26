@@ -144,12 +144,12 @@ public class Kunde extends Person {
 			// Anzahl an gewünschten Teilnehmenden wird angegeben und überprüft ob genug
 			// Plätze vorhanden sind
 			System.out.println("Für wie viele Personen wollen Sie reservieren?");
-			int auswahlAnzahlPlaetze = Integer.valueOf(scan.next().trim());
+			int auswahlAnzahlPlaetze = Integer.valueOf(scan.nextLine().trim());
 			// Wenn genug Plätze vorhanden sind wird der IF-Block ausgeführt
 			if (auswahlAnzahlPlaetze <= veranstaltung.getTotalPlaetze()) {
 				System.out.println(
 						"Es sind genug Plätze verfügbar. \nWollen Sie die Auswahl bezahlen, wählen Sie 1. \nWollen Sie eine andere Anzahl an Personen wählen, wählen Sie 2. \nWollen Sie zrück zur Hauptauswahl, wählen Sie 3.");
-				int auswahl = Integer.valueOf(scan.next().trim());
+				int auswahl = Integer.valueOf(scan.nextLine().trim());
 				switch (auswahl) {
 				// Die Methode Zahlen wird ausgeführt
 				case 1:
@@ -173,7 +173,7 @@ public class Kunde extends Person {
 			else {
 				System.out.println(
 						"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzahl anzupassen, wählen Sie 1. \nWollen Sie zrück zur Hauptauswahl, wählen Sie 2.");
-				int auswahl1 = Integer.valueOf(scan.next().trim());
+				int auswahl1 = Integer.valueOf(scan.nextLine().trim());
 				switch (auswahl1) {
 				case 1:
 					// Die Personenanzahl wird angepasst
@@ -195,12 +195,12 @@ public class Kunde extends Person {
 		// Der Gesamtpreis wird angegeben
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Der Preis beträgt: " + totalPreis + " CHF. \nBesitzen Sie einen Gutschein? (ja/nein)");
-		String eingabeGutscheinVorhanden = scan.next();
+		String eingabeGutscheinVorhanden = scan.nextLine();
 		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
 		switch (eingabeGutscheinVorhanden) {
 		case "ja":
 			System.out.println("Bitte geben Sie den Code ein:");
-			String eingabeCode = scan.next();
+			String eingabeCode = scan.nextLine();
 			switch (eingabeCode) {
 			// wenn der Code für einen 10% Gutschein angegeben wird
 			case "A":
@@ -222,18 +222,18 @@ public class Kunde extends Person {
 		}
 		// Zahlungsdaten des Kunden werden angegeben
 		System.out.println("Bitte geben Sie den Karteninhaber ein:");
-		String eingabeKartenInhaber = scan.next().trim();
+		String eingabeKartenInhaber = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie ihre Kartennummer ein:");
-		String eingabeKartennummer = scan.next().trim();
+		String eingabeKartennummer = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie das Verfallsdatum der Karte ein:");
-		String eingabeVerfallsdatum = scan.next().trim();
+		String eingabeVerfallsdatum = scan.nextLine().trim();
 		System.out.println("Bitte geben Sie den CVC-Code ein:");
-		String eingabeCVCCode = scan.next().trim();
+		String eingabeCVCCode = scan.nextLine().trim();
 		// Zahlungsdaten werden bestätigt
 		System.out.println("Sind die folgenden Daten korrekt? (ja/nein)" + 
 				"\nKarteninhaber:" + eingabeKartenInhaber + "\nKartennummer: " + eingabeKartennummer
 				+ "\nVerfallsdatum: " + eingabeVerfallsdatum + "\nCVC Code: " + eingabeCVCCode);
-		String bestaetigung = scan.next().trim();
+		String bestaetigung = scan.nextLine().trim();
 		switch (bestaetigung) {
 		case "ja":
 			System.out.println("Bezahlung erfolgreich.");
@@ -253,20 +253,20 @@ public class Kunde extends Person {
 		Scanner scan = new Scanner(System.in);
 		boolean exit = false;
 		while(!exit) {
-			int auswahl = Integer.valueOf(scan.next().trim());
+			int auswahl = Integer.valueOf(scan.nextLine().trim());
 			switch (auswahl) {
 			case 1:
 				System.out.println("Geben Sie die Anzahl Sterne an:");
 				int bewertungStern = scan.nextInt();
 				System.out.println("Möchten Sie auch einen Bewertungs Text abgeben?  (ja/nein)");
-				String antwort = scan.next().trim();
+				String antwort = scan.nextLine().trim();
 				String bewertungText = "";
 				switch (antwort) {
 				// Falls ein Bewertungstext abgegeben wird, wird am Ende ein 10% Gutschein
 				// erstellt
 				case "ja":
 					System.out.println("Geben Sie ihren Text ein:");
-					bewertungText = scan.next().trim();
+					bewertungText = scan.nextLine().trim();
 					break;
 				// Falls kein Bewertungstext abgegeben wird, wird am Ende ein 5% Gutschein
 				// erstellt

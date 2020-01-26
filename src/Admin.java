@@ -9,10 +9,10 @@ public class Admin extends Person {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte gewünschte Aktion wählen: \n1 Neuen Veranstalter erfassen"
 				+ "\n2 Bestehenden Veranstalter bearbeiten" + "\n3 Veranstalter löschen"
-				+ "\n4 Neue Veranstaltung erfassen" + "\n5 Bestehenden Veranstaltung bearbeiten"
-				+ "\n6 Veranstaltung löschen" + "\n7 Neue Aktivität erfassen" + "\n8 Bestehende Aktivität bearbeiten"
-				+ "\n9 Aktivität löschen");
-		String zahl = scan.next().trim();
+				+ "\n4 Neue Aktivität erfassen" + "\n5 Bestehenden Aktivität bearbeiten"
+				+ "\n6 Aktivität löschen" + "\n7 Neue Veranstaltung erfassen" + "\n8 Bestehende Veranstaltung bearbeiten"
+				+ "\n9 Veranstaltung löschen");
+		String zahl = scan.nextLine().trim();
 	
 		switch (zahl) {
 		case "1":
@@ -36,11 +36,12 @@ public class Admin extends Person {
 	private void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter-Namen erfassen: ");
-		String veranstalterName = scan.next().trim();
+		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
-		String veranstalterBeschrieb = scan.next().trim();
+		String veranstalterBeschrieb = scan.nextLine().trim();
 			// Neuen Veranstalter erfassen Code:
 		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
+		System.out.println("Veranstalter erfasst.");
 		//Data.getInstance().getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
@@ -52,17 +53,18 @@ public class Admin extends Person {
 		for (int i = 0; i < data.getVeranstalter().size(); i++) {
 			System.out.println(i + ". " + data.getVeranstalter().get(i).getVeranstalter());
 		}
-		int aktVeranstalter = Integer.valueOf(scan.next().trim());
+		int aktVeranstalter = Integer.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Aktivitäts-Beschrieb erfassen: ");
-		String aktBeschrieb = scan.next().trim();
+		String aktBeschrieb = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-Art erfassen: ");
-		String aktArt = scan.next().trim();
+		String aktArt = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-Ort erfassen: ");
-		String aktOrt = scan.next().trim();
+		String aktOrt = scan.nextLine().trim();
 		System.out.println("Bitte Aktivitäts-PLZ erfassen: ");
-		int aktPLZ = Integer.valueOf(scan.next().trim());
+		int aktPLZ = Integer.valueOf(scan.nextLine().trim());
 		// Neue Aktivtität erfassen Code:
 		aktErfassen(data.getVeranstalter().get(aktVeranstalter), aktBeschrieb, aktArt, aktOrt, aktPLZ);
+		System.out.println("Aktivität erfasst.");
 		//data.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
@@ -75,15 +77,15 @@ public class Admin extends Person {
 			System.out.println(i + ". " + data.getAktivitaet().get(i).getVeranstalter().getVeranstalter() + " - "
 					+ data.getAktivitaet().get(i).getBeschrieb());
 		}
-		int veranstaltungsAktivitaet = Integer.valueOf(scan.next().trim());
+		int veranstaltungsAktivitaet = Integer.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Veranstaltungs-Datum erfassen (Format: DD.MM.YYYY): ");
-		String veranstaltungsDatum = scan.next().trim();
+		String veranstaltungsDatum = scan.nextLine().trim();
 		System.out.println("Bitte Veranstaltungs-Zeit erfassen (Format: HH:MM): ");
-		String veranstaltungsZeit = scan.next().trim();
+		String veranstaltungsZeit = scan.nextLine().trim();
 		System.out.println("Bitte Veranstaltungs-Preis erfassen: ");
-		double veranstaltungsPreis = Double.valueOf(scan.next().trim());
+		double veranstaltungsPreis = Double.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
-		int veranstaltungsPlaetze = Integer.valueOf(scan.next().trim());
+		int veranstaltungsPlaetze = Integer.valueOf(scan.nextLine().trim());
 
 		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum + " " + veranstaltungsZeit,
 				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
@@ -91,6 +93,7 @@ public class Admin extends Person {
 		// Neuen Veranstaltung erfassen Code:
 		veranstaltungErfassen(data.getAktivitaet().get(veranstaltungsAktivitaet), datum, veranstaltungsPreis,
 				veranstaltungsPlaetze);
+		System.out.println("Veranstaltung erfasst.");
 		//data.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
