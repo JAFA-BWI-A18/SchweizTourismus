@@ -32,6 +32,7 @@ public class Admin extends Person {
 
 	}
 
+//	Methoden
 	// Neuen Veranstalter erfassen Vorführen
 	private void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);

@@ -1,7 +1,5 @@
 
-
 public class Bewertung {
-
 
 //	Attribute
 	private String bewertungText;
@@ -29,6 +27,4 @@ public class Bewertung {
 	public void setBewertungStern(int bewertungStern) {
 		this.bewertungStern = bewertungStern;
 	}
-
-
 }

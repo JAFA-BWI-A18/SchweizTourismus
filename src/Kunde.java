@@ -113,9 +113,12 @@ public class Kunde extends Person {
 	public void pruefungAlter() {
 		// Heutiges Datum wird abgefragt
 		LocalDate datumHeute = LocalDate.now();
+		// Falls die Person älter als 16 ist, wird der Status auf Erwachen gesetzt
 		if (this.geburtstag.plusYears(16).isBefore(datumHeute)) {
 			this.erwachsen = true;
-		} else {
+		}
+		// Ansonsten bleibt die Person ein Kind
+		else {
 			this.erwachsen = false;
 		}
 	}
@@ -159,9 +162,8 @@ public class Kunde extends Person {
 					break;
 				// Die gewünschte Personenanzahl kann angepasst werden
 				case 2:
-					// Zurück zum Menu
 					break;
-
+				// Zurück zum Menu
 				case 3:
 					exit = true;
 					break;
@@ -175,11 +177,11 @@ public class Kunde extends Person {
 						"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzahl anzupassen, wählen Sie 1. \nWollen Sie zrück zur Hauptauswahl, wählen Sie 2.");
 				int auswahl1 = Integer.valueOf(scan.nextLine().trim());
 				switch (auswahl1) {
+				// Die Personenanzahl wird angepasst
 				case 1:
-					// Die Personenanzahl wird angepasst
 					break;
+				// Zurück zum Menu
 				case 2:
-					// Zurück zum Menu
 					exit = true;
 					break;
 				default:
@@ -192,7 +194,7 @@ public class Kunde extends Person {
 	public void zahlen(Veranstaltung veranstaltung, int anzahlPlaetze) {
 		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
 
-		// Der Gesamtpreis wird angegeben
+		// Der Gesamtpreis wird berechnet und eingefüllt
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Der Preis beträgt: " + totalPreis + " CHF. \nBesitzen Sie einen Gutschein? (ja/nein)");
 		String eingabeGutscheinVorhanden = scan.nextLine();
@@ -230,9 +232,9 @@ public class Kunde extends Person {
 		System.out.println("Bitte geben Sie den CVC-Code ein:");
 		String eingabeCVCCode = scan.nextLine().trim();
 		// Zahlungsdaten werden bestätigt
-		System.out.println("Sind die folgenden Daten korrekt? (ja/nein)" + 
-				"\nKarteninhaber:" + eingabeKartenInhaber + "\nKartennummer: " + eingabeKartennummer
-				+ "\nVerfallsdatum: " + eingabeVerfallsdatum + "\nCVC Code: " + eingabeCVCCode);
+		System.out.println("Sind die folgenden Daten korrekt? (ja/nein)" + "\nKarteninhaber:" + eingabeKartenInhaber
+				+ "\nKartennummer: " + eingabeKartennummer + "\nVerfallsdatum: " + eingabeVerfallsdatum + "\nCVC Code: "
+				+ eingabeCVCCode);
 		String bestaetigung = scan.nextLine().trim();
 		switch (bestaetigung) {
 		case "ja":
@@ -240,21 +242,23 @@ public class Kunde extends Person {
 			bewerten(veranstaltung);
 			break;
 		default:
-			System.out.println(
-					"Zahlvorgang wurde abgebrochen.\n");
+			System.out.println("Zahlvorgang wurde abgebrochen.\n");
 			break;
 		}
 	}
 
 	public void bewerten(Veranstaltung veranstaltung) {
+		// Die Aktivität welche man gebucht und bezahlt hat, steht zur Bewertung zur
+		// Verfügung
 		System.out.println("Folgende Aktivitäten steht zur Bewertung zur Verfügung: "
 				+ veranstaltung.getAktivitaet().getBeschrieb()
 				+ ". \nFalls Sie eine Bewertung abgeben wollen, wählen Sie 1. \nFalls Sie keine Bewertung abgeben wollen, wählen Sie 2.");
 		Scanner scan = new Scanner(System.in);
 		boolean exit = false;
-		while(!exit) {
+		while (!exit) {
 			int auswahl = Integer.valueOf(scan.nextLine().trim());
 			switch (auswahl) {
+			// Eine Bewertung kann abgegeben werden
 			case 1:
 				System.out.println("Geben Sie die Anzahl Sterne an:");
 				int bewertungStern = scan.nextInt();
@@ -273,18 +277,20 @@ public class Kunde extends Person {
 				default:
 					break;
 				}
-				System.out.println("Danke für Ihre bewertung.");
-				String gutscheinCode = Data.getInstance().bewertungHinzufuegen(veranstaltung.getAktivitaet(), bewertungText,
-						bewertungStern);
+				System.out.println("Danke für Ihre Bewertung.");
+				String gutscheinCode = Data.getInstance().bewertungHinzufuegen(veranstaltung.getAktivitaet(),
+						bewertungText, bewertungStern);
 				System.out.println("Ihr Gutschein-Code lautet: " + gutscheinCode);
 				exit = true;
 				break;
+			// Man möchte keine Bewertung abgeben
 			case 2:
 				System.out.println("Sie haben keine Bewertung abgegeben.");
 				exit = true;
 				break;
 			default:
-				System.out.println("Ihre auswahl steht nicht zur Verfügung. Bitte wählen Sie eine gültige Auswahl aus.");
+				System.out
+						.println("Ihre auswahl steht nicht zur Verfügung. Bitte wählen Sie eine gültige Auswahl aus.");
 			}
 		}
 	}

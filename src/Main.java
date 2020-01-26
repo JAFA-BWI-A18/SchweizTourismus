@@ -9,27 +9,29 @@ public class Main {
 	public static void main(String[] args) {
 		Main main = new Main();
 		Person user = main.login();
-		//Login wurde abgebrochen, beende Program
-		if(user == null) {
+		// Login wurde abgebrochen, beende Programm
+		if (user == null) {
 			System.exit(0);
 		}
 		Scanner scan = new Scanner(System.in);
-		if(user instanceof Kunde) {
+		// Wenn man sich als Kunde einloggt, wird der If-Block ausgeführt
+		if (user instanceof Kunde) {
 			// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
 			Kunde kunde = (Kunde) user;
 			// Buchen, Zahlen und bewerten aufgerufen
 			boolean exit = false;
-			while(!exit) {
+			while (!exit) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um eine Suche zu starten. \nWählen Sie 2, um sich auszuloggen.");
 				int eingabe = Integer.valueOf(scan.nextLine().trim());
 				switch (eingabe) {
 				case 1:
 					Veranstaltung veranstaltung = kunde.suchen();
-					if(veranstaltung != null) {
-						if(kunde.isErwachsen()) {
+					if (veranstaltung != null) {
+						if (kunde.isErwachsen()) {
 							// Wie soll mit den Angaben aus der Suche weitergefahren werden
-							System.out.println("Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist zurück zum Hauptmenu");
+							System.out.println(
+									"Wie wollen Sie weiterfahren: \n1 ist Auswahl buchen \n2 ist zurück zum Hauptmenu");
 							int auswahl2 = Integer.valueOf(scan.nextLine().trim());
 							switch (auswahl2) {
 							// Falls 1 ausgewählt wird, wird die Methode Buchen aus der Klasse Kunde
@@ -53,10 +55,11 @@ public class Main {
 				default:
 					System.out.println("Ihre Auswahl ist ungültig.");
 				}
-				
+
 			}
 		}
-		else if(user instanceof Admin) {
+		// Wenn man sich als Admin einloggt, wird der ElseIf-Block ausgeführt
+		else if (user instanceof Admin) {
 			Admin admin = (Admin) user;
 			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
 			boolean exit = false;
@@ -70,7 +73,7 @@ public class Main {
 					break;
 				case 2:
 					admin.suchen();
-				 break;
+					break;
 				case 3:
 					admin.logout();
 					exit = true;
@@ -82,53 +85,59 @@ public class Main {
 		}
 	}
 
-	//Methoden
+	// Methoden
 	public Person login() {
-		boolean exit =false;		
+		boolean exit = false;
 		Scanner scan = new Scanner(System.in);
 		Data data = Data.getInstance();
-		while(!exit) {
+		while (!exit) {
 			// Benutzername und Passwort werden eingegeben
 			System.out.println("Geben Sie ihren Benutzernamen ein:");
 			String eingabeBenutzername = scan.nextLine().trim();
 			System.out.println("Geben Sie ihr Passwort ein:");
 			String eingabePasswort = scan.nextLine().trim();
-	
+
 			// Benutzername und Passwort werden überprüft. Falls diese übereinstimmen, wird
 			// man eingeloggt
 			List<Kunde> kunden = data.getKundenDaten();
 			List<Admin> admins = data.getAdminDaten();
-	
+
 			// Jeder Kunde in der Liste wird überprüft.
 			for (Kunde kunde : kunden) {
-				if(kunde.getBenutzername().equals(eingabeBenutzername) && kunde.getPasswort().equals(eingabePasswort) ) {
+				if (kunde.getBenutzername().equals(eingabeBenutzername)
+						&& kunde.getPasswort().equals(eingabePasswort)) {
 					System.out.println("Sie sind nun eingeloggt.");
 					kunde.umwandeln();
 					return kunde;
 				}
-				
+
 			}
 			// Falls die Eingabe nicht zu einem Kunden gehört, wird sie mit der Adminliste
+			// verglichen
 			for (Admin admin : admins) {
-				if(admin.getBenutzername().equals(eingabeBenutzername) && admin.getPasswort().equals(eingabePasswort)) {
+				if (admin.getBenutzername().equals(eingabeBenutzername)
+						&& admin.getPasswort().equals(eingabePasswort)) {
 					System.out.println("Sie sind als Admin eingeloggt.");
 					return admin;
 				}
 			}
-			System.out.println("Ihr Benutzername oder Passwort ist falsch.\n"+
-						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um es nochmals zu versuchen. \nWählen Sie 2, um einen neuen Benutzer anzulegen. \nWählen Sie 3, um den Vorgang abzubrechen.");
+			System.out.println("Ihr Benutzername oder Passwort ist falsch.\n"
+					+ "Wie wollen Sie weiterfahren? \nWählen Sie 1, um es nochmals zu versuchen. \nWählen Sie 2, um einen neuen Benutzer anzulegen. \nWählen Sie 3, um den Vorgang abzubrechen.");
 			int auswahl1 = Integer.valueOf(scan.nextLine().trim());
-			switch(auswahl1) {
-				case 1:
-					 break;
-				case 2:
-					exit = !kontoErstellen();
-					break;
-				case 3:
-					exit=true;
-					break;
-				default:
-					System.out.println("Ihre Auswahl ist ungültig. Das Login wird erneut gestartet.");
+			switch (auswahl1) {
+			// nochmals probieren
+			case 1:
+				break;
+			// neues Konto erstellen
+			case 2:
+				exit = !kontoErstellen();
+				break;
+			// Abbrechen
+			case 3:
+				exit = true;
+				break;
+			default:
+				System.out.println("Ihre Auswahl ist ungültig. Das Login wird erneut gestartet.");
 			}
 		}
 		return null;
@@ -163,11 +172,12 @@ public class Main {
 		String eingabePasswort = scan.nextLine().trim();
 		boolean agb = false;
 		while (!agb) {
-			System.out.println("Sind sie mit den AGBs einverstanden? (ja/nein) Falls Sie die AGB ablehnen, wird die Konto erstellung abgebrochen");
+			System.out.println(
+					"Sind sie mit den AGBs einverstanden? (ja/nein) Falls Sie die AGB ablehnen, wird die Konto erstellung abgebrochen");
 			String eingabeAGB = scan.nextLine().trim();
 			switch (eingabeAGB) {
 			case "ja":
-				agb= true;
+				agb = true;
 				break;
 			case "nein":
 				return false;
@@ -176,7 +186,7 @@ public class Main {
 				System.out.println("Ihre Angabe ist ungültig.");
 			}
 		}
-		
+		// Eingaben werden erfasst und gespeichert als neuer Kunde
 		Kunde neuerKunde = new Kunde();
 		neuerKunde.setBenutzername(eingabeBenutzername);
 		neuerKunde.setPasswort(eingabePasswort);

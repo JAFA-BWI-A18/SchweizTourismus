@@ -4,13 +4,11 @@ import java.util.Scanner;
 public class Person {
 
 //	Attribute
-
 	private String benutzername;
 	private String passwort;
 	private boolean exit;
 
 //	Getters und Setter erstellt
-
 	public String getBenutzername() {
 		return benutzername;
 	}
@@ -51,7 +49,7 @@ public class Person {
 		System.out.println(
 				"Um einen Veranstalter zu suchen, wählen Sie 1. \nUm eine Aktivität zu suchen, wählen Sie 2. \nUm eine Veranstaltung zu suchen, wählen Sie 3.");
 		int auswahl1 = Integer.valueOf(scan.nextLine().trim());
-
+		// Veranstalter suchen
 		if (auswahl1 == 1) {
 			// Alle Veranstalter werden angezeigt
 			System.out.println("Wählen Sie einen Veranstalter aus:");
@@ -88,7 +86,9 @@ public class Person {
 					+ veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
 					+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
-		} else if (auswahl1 == 2) {
+		}
+		// Aktivitäten suchen
+		else if (auswahl1 == 2) {
 			// Alle Aktivitäten werden angezeigt
 			System.out.println("Wählen Sie eine Aktivität aus:");
 			for (int i = 0; i < data.getAktivitaet().size(); i++) {
@@ -115,7 +115,9 @@ public class Person {
 							+ "\nAktivität: " + veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
 							+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
 
-		} else if (auswahl1 == 3) {
+		}
+		// Veranstaltung suchen
+		else if (auswahl1 == 3) {
 			// Alle Veranstaltungen werden angezeigt
 			System.out.println("Wählen Sie eine Veranstaltung aus:");
 			for (int i = 0; i < data.getVeranstaltung().size(); i++) {

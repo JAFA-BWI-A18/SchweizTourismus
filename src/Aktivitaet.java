@@ -1,12 +1,10 @@
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Aktivitaet {
 
+	// Attribute
 	private String beschrieb;
 	private String art; // Indoor Outdoor
 	private String ort;
@@ -16,6 +14,7 @@ public class Aktivitaet {
 	private ArrayList<Veranstaltung> veranstaltung;
 	private ArrayList<Bewertung> bewertungen;
 
+	// Konstruktor
 	public Aktivitaet(String art, String ort, int plz, Veranstalter veranstalter, String beschrieb) {
 		super();
 		this.art = art;
@@ -28,6 +27,7 @@ public class Aktivitaet {
 		this.bewertungen = new ArrayList<>();
 	}
 
+	// Getters und Setters
 	public String getArt() {
 		return art;
 	}
@@ -64,6 +64,15 @@ public class Aktivitaet {
 		return veranstalter;
 	}
 
+	public String getBeschrieb() {
+		return beschrieb;
+	}
+
+	public void setBeschrieb(String beschrieb) {
+		this.beschrieb = beschrieb;
+	}
+
+	// Methoden
 	public void bewertungHinzugügen(Bewertung b) {
 		bewertungen.add(b);
 	}
@@ -90,14 +99,6 @@ public class Aktivitaet {
 			return sterne.stream().mapToDouble(Double::valueOf).sum() / (double) sterne.size();
 		}
 		return -1;
-	}
-
-	public String getBeschrieb() {
-		return beschrieb;
-	}
-
-	public void setBeschrieb(String beschrieb) {
-		this.beschrieb = beschrieb;
 	}
 
 	@Override

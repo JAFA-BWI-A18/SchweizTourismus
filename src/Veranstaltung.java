@@ -1,5 +1,4 @@
 
-
 import java.time.LocalDateTime;
 
 public class Veranstaltung {
@@ -19,9 +18,9 @@ public class Veranstaltung {
 		this.offline = false;
 		this.aktivitaet = aktivitaet;
 	}
-	
+
 	public Veranstaltung() {
-		
+
 	}
 
 //	Getters und Setters erstellt
@@ -66,5 +65,4 @@ public class Veranstaltung {
 		return "Veranstaltung [datum=" + datum + ", preis=" + preis + ", totalPlaetze=" + totalPlaetze + ", offline="
 				+ offline + ", aktivitaet=" + aktivitaet.getBeschrieb() + "]";
 	}
-
 }

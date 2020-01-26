@@ -5,15 +5,17 @@ import java.util.Scanner;
 
 //Diese Klasse dient als unsere Datenbank
 public class Data {
-	
+
+	// Attribute
 	private static Data instance;
-	
+
 	private final List<Veranstalter> veranstalter;
 	private final List<Aktivitaet> aktivitaeten;
 	private final List<Veranstaltung> veranstaltungen;
 	private final List<Admin> admins;
 	private final List<Kunde> kunden;
-	
+
+	// Konstruktor
 	private Data() {
 		this.veranstalter = new ArrayList<>();
 		this.aktivitaeten = new ArrayList<>();
@@ -24,33 +26,36 @@ public class Data {
 		this.basisKundenDaten();
 		this.basisAdminDaten();
 	}
-	
+
+	// Getters and Setters
+	public List<Veranstalter> getVeranstalter() {
+		return veranstalter;
+	}
+
+	public List<Aktivitaet> getAktivitaet() {
+		return aktivitaeten;
+	}
+
+	public List<Veranstaltung> getVeranstaltung() {
+		return veranstaltungen;
+	}
+
+	public List<Kunde> getKundenDaten() {
+		return kunden;
+	}
+
+	public List<Admin> getAdminDaten() {
+		return admins;
+	}
+
+	// Methoden
 	public static Data getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Data();
 		}
 		return instance;
 	}
 
-	
-	public List<Veranstalter> getVeranstalter(){
-		return veranstalter;
-	}
-	public List<Aktivitaet> getAktivitaet(){
-		return aktivitaeten;
-	}
-	public List<Veranstaltung> getVeranstaltung (){
-		return veranstaltungen;
-	}
-	
-	public List<Kunde> getKundenDaten(){
-		return kunden;
-	}
-	
-	public List<Admin> getAdminDaten() {
-		return admins;
-	}
-	
 	public Veranstalter veranstalterErfassen(String veranstalterStr, String beschreibung) {
 		Veranstalter tmp = new Veranstalter(veranstalterStr, beschreibung);
 		veranstalter.add(tmp);
@@ -68,32 +73,30 @@ public class Data {
 		return tmp;
 	}
 
-	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis,
-			int totalPlaetze) {
+	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis, int totalPlaetze) {
 		Veranstaltung tmp = new Veranstaltung(a, datum, preis, totalPlaetze);
 		a.veranstaltungHinzufügen(tmp);
 		veranstaltungen.add(tmp);
 		return tmp;
 	}
-	
+
 	public String bewertungHinzufuegen(Aktivitaet a, String text, int stern) {
 		Bewertung tmp = new Bewertung(text, stern);
 		a.bewertungHinzugügen(tmp);
-		if(tmp.getBewertungText() != null && !tmp.getBewertungText().isBlank()) {
-			return "A";	
+		if (tmp.getBewertungText() != null && !tmp.getBewertungText().isBlank()) {
+			return "A";
 		}
 		return "B";
 
 	}
-	
+
 	public void kundenHinzufuegen(Kunde kunde) {
 		this.kunden.add(kunde);
 	}
 
-
 	// Kunden instanzieren
 	private void basisKundenDaten() {
-	
+
 		Kunde kunde1 = new Kunde();
 		kunde1.setBenutzername("Amina");
 		kunde1.setPasswort("ILoveHWZ");
@@ -114,7 +117,7 @@ public class Data {
 	}
 
 	// Admin instanzieren
-	private  void basisAdminDaten() {
+	private void basisAdminDaten() {
 		Admin admin1 = new Admin();
 		admin1.setBenutzername("SchweizTourismus");
 		admin1.setPasswort("ILoveSwitzerland");
@@ -128,8 +131,7 @@ public class Data {
 		Veranstalter oaf = veranstalterErfassen("Open Air Frauenfeld", "bla bla");
 
 		// Aktivität Tageseintritt für OAF
-		Aktivitaet eintritt = aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500,
-				"Eintritt zum groessten Festival");
+		Aktivitaet eintritt = aktivitaetErfassen(oaf, "Outdoor", "Frauenfeld", 8500, "Eintritt zum groessten Festival");
 
 		// Veranstaltung Tag 1 für Eintritt am OAF
 		veranstaltungErfassen(eintritt, LocalDateTime.of(2020, 07, 9, 14, 00), 100, 50);
