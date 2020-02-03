@@ -3,14 +3,14 @@ import java.time.LocalDateTime;
 
 public class Veranstaltung {
 
-//	Attribute
+//Attribute
 	private LocalDateTime datum;
 	private double preis;
 	private int totalPlaetze;
 	private boolean offline;
 	private Aktivitaet aktivitaet;
 
-//	Konstruktoren
+//Konstruktoren
 	public Veranstaltung(Aktivitaet aktivitaet, LocalDateTime datum, double preis, int totalPlaetze) {
 		this.datum = datum;
 		this.preis = preis;
@@ -20,10 +20,9 @@ public class Veranstaltung {
 	}
 
 	public Veranstaltung() {
-
 	}
 
-//	Getters und Setters erstellt
+//Getters und Setters erstellt
 	public LocalDateTime getDatum() {
 		return datum;
 	}

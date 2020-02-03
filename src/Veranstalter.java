@@ -5,20 +5,20 @@ import java.util.stream.Collectors;
 
 public class Veranstalter {
 
-	// Attribute
+//Attribute
 	private String veranstalter;
 	private String beschreibung;
 
 	private ArrayList<Aktivitaet> aktivitaeten;
 
-	// Konstruktor
+//Konstruktor
 	public Veranstalter(String veranstalter, String beschreibung) {
 		this.veranstalter = veranstalter;
 		this.beschreibung = beschreibung;
 		this.aktivitaeten = new ArrayList<>();
 	}
 
-	// Getters und Setters
+//Getters und Setters
 	public String getVeranstalter() {
 		return veranstalter;
 	}
@@ -48,7 +48,7 @@ public class Veranstalter {
 		return "Veranstalter [veranstalter=" + veranstalter + ", beschreibung=" + beschreibung + "]";
 	}
 
-	// Methoden
+//Methoden
 	public List<String> getAnzeigeBewertungText() {
 		return aktivitaeten.stream().flatMap(a -> a.getBewertungText().stream()).collect(Collectors.toList());
 	}
@@ -61,5 +61,4 @@ public class Veranstalter {
 		}
 		return -1;
 	}
-
 }

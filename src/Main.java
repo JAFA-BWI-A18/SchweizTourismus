@@ -16,16 +16,17 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		// Wenn man sich als Kunde einloggt, wird der If-Block ausgeführt
 		if (user instanceof Kunde) {
-			// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
 			Kunde kunde = (Kunde) user;
-			// Buchen, Zahlen und bewerten aufgerufen
 			boolean exit = false;
+			// solange exit = false, dann wird die While-Schlaufe ausgeführt
 			while (!exit) {
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um eine Suche zu starten. \nWählen Sie 2, um sich auszuloggen.");
 				int eingabe = Integer.valueOf(scan.nextLine().trim());
 				switch (eingabe) {
 				case 1:
+					// Man kann eine Suche starten. Dabei wird automatisch danach die Methoden
+					// Buchen, Zahlen und bewerten aufgerufen
 					Veranstaltung veranstaltung = kunde.suchen();
 					if (veranstaltung != null) {
 						if (kunde.isErwachsen()) {
@@ -48,6 +49,7 @@ public class Main {
 						}
 					}
 					break;
+				// Man wird ausgeloggt
 				case 2:
 					exit = true;
 					kunde.logout();
@@ -61,19 +63,23 @@ public class Main {
 		// Wenn man sich als Admin einloggt, wird der ElseIf-Block ausgeführt
 		else if (user instanceof Admin) {
 			Admin admin = (Admin) user;
-			// Man wird vor die Wahl gestellt, was man als nächstes machen will.
 			boolean exit = false;
+			// solange exit = false, dann wird die While-Schlaufe ausgeführt
 			while (!exit) {
+				// Man wird vor die Wahl gestellt, was man als nächstes machen will.
 				System.out.println(
 						"Wie wollen Sie weiterfahren? \nWählen Sie 1, um die Daten zu verwalten. \nWählen Sie 2, um sich eine Veranstaltung zu suchen.\nWählen Sie 3, um sich auszuloggen.");
 				int eingabe = Integer.valueOf(scan.nextLine().trim());
 				switch (eingabe) {
+				// Daten Verwalten wird eingeleitet
 				case 1:
 					admin.inputStart();
 					break;
+				// Suche wird eingeleitet
 				case 2:
 					admin.suchen();
 					break;
+				// Man wird ausgeloggt
 				case 3:
 					admin.logout();
 					exit = true;
@@ -90,6 +96,7 @@ public class Main {
 		boolean exit = false;
 		Scanner scan = new Scanner(System.in);
 		Data data = Data.getInstance();
+		// solange Exit = false, dann wird die While-Schlaufe ausgeführt
 		while (!exit) {
 			// Benutzername und Passwort werden eingegeben
 			System.out.println("Geben Sie ihren Benutzernamen ein:");
@@ -107,6 +114,8 @@ public class Main {
 				if (kunde.getBenutzername().equals(eingabeBenutzername)
 						&& kunde.getPasswort().equals(eingabePasswort)) {
 					System.out.println("Sie sind nun eingeloggt.");
+					// Es wird die Methode Umwandeln ausgeführt, falls die eingeloggte Person ein
+					// Kind ist
 					kunde.umwandeln();
 					return kunde;
 				}
@@ -121,6 +130,8 @@ public class Main {
 					return admin;
 				}
 			}
+			// Falls das Passwort oder der Benutzername falsch ist, bzw. die Person nicht
+			// registriert, wird man vor die Wahl gestellt, wie man weiterfahren möchte.
 			System.out.println("Ihr Benutzername oder Passwort ist falsch.\n"
 					+ "Wie wollen Sie weiterfahren? \nWählen Sie 1, um es nochmals zu versuchen. \nWählen Sie 2, um einen neuen Benutzer anzulegen. \nWählen Sie 3, um den Vorgang abzubrechen.");
 			int auswahl1 = Integer.valueOf(scan.nextLine().trim());

@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Kunde extends Person {
 
-//	Attribute
+//Attribute
 	private String name;
 	private String vorname;
 	private String adresse;
@@ -16,7 +16,7 @@ public class Kunde extends Person {
 	private LocalDate geburtstag;
 	private boolean erwachsen = true;
 
-//	Getters und Setters erstellt
+//Getters und Setters erstellt
 	public String getName() {
 		return name;
 	}
@@ -95,7 +95,6 @@ public class Kunde extends Person {
 
 	public void setGeburtstag(LocalDate geburtstag) {
 		this.geburtstag = geburtstag;
-
 	}
 
 	public boolean isErwachsen() {
@@ -106,10 +105,10 @@ public class Kunde extends Person {
 		this.erwachsen = erwachsen;
 	}
 
-//	Methoden
+//Methoden
 
 	// Das Alter des Kundens wird überprüft, um festzustellen ob dieser Erwachsen
-	// oder ein Kind ist
+	// oder ein Kind ist und der entsprechende Boolean wird im Falle eines Erwachsenens auf true gesetzt
 	public void pruefungAlter() {
 		// Heutiges Datum wird abgefragt
 		LocalDate datumHeute = LocalDate.now();
@@ -143,6 +142,7 @@ public class Kunde extends Person {
 	public void buchen(Veranstaltung veranstaltung) {
 		Scanner scan = new Scanner(System.in);
 		boolean exit = false;
+		//solange die Variabel exit auf false gesetzt ist, wird die While-Schleife durchgeführt
 		while (!exit) {
 			// Anzahl an gewünschten Teilnehmenden wird angegeben und überprüft ob genug
 			// Plätze vorhanden sind
@@ -177,7 +177,7 @@ public class Kunde extends Person {
 						"Es sind nicht genügend Plätze verfügbar. \nUm die Personenanzahl anzupassen, wählen Sie 1. \nWollen Sie zrück zur Hauptauswahl, wählen Sie 2.");
 				int auswahl1 = Integer.valueOf(scan.nextLine().trim());
 				switch (auswahl1) {
-				// Die Personenanzahl wird angepasst
+				// Die Personenanzahl kann angepasst werden
 				case 1:
 					break;
 				// Zurück zum Menu
@@ -192,14 +192,13 @@ public class Kunde extends Person {
 	}
 
 	public void zahlen(Veranstaltung veranstaltung, int anzahlPlaetze) {
-		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
-
 		// Der Gesamtpreis wird berechnet und eingefüllt
+		double totalPreis = (veranstaltung.getPreis() * anzahlPlaetze);
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Der Preis beträgt: " + totalPreis + " CHF. \nBesitzen Sie einen Gutschein? (ja/nein)");
 		String eingabeGutscheinVorhanden = scan.nextLine();
-		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
 		switch (eingabeGutscheinVorhanden) {
+		// Falls man einen Gutschein besitz, kann man nun den Code eingeben.
 		case "ja":
 			System.out.println("Bitte geben Sie den Code ein:");
 			String eingabeCode = scan.nextLine();

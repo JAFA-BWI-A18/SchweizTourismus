@@ -4,7 +4,7 @@ import java.util.stream.Collectors;
 
 public class Aktivitaet {
 
-	// Attribute
+// Attribute
 	private String beschrieb;
 	private String art; // Indoor Outdoor
 	private String ort;
@@ -14,7 +14,7 @@ public class Aktivitaet {
 	private ArrayList<Veranstaltung> veranstaltung;
 	private ArrayList<Bewertung> bewertungen;
 
-	// Konstruktor
+// Konstruktor
 	public Aktivitaet(String art, String ort, int plz, Veranstalter veranstalter, String beschrieb) {
 		super();
 		this.art = art;
@@ -27,7 +27,7 @@ public class Aktivitaet {
 		this.bewertungen = new ArrayList<>();
 	}
 
-	// Getters und Setters
+// Getters und Setters
 	public String getArt() {
 		return art;
 	}
@@ -72,12 +72,12 @@ public class Aktivitaet {
 		this.beschrieb = beschrieb;
 	}
 
-	// Methoden
-	public void bewertungHinzugügen(Bewertung b) {
+// Methoden
+	public void bewertungHinzuguegen(Bewertung b) {
 		bewertungen.add(b);
 	}
 
-	public void veranstaltungHinzufügen(Veranstaltung v) {
+	public void veranstaltungHinzufugen(Veranstaltung v) {
 		veranstaltung.add(v);
 	}
 

@@ -3,12 +3,12 @@ import java.util.Scanner;
 
 public class Person {
 
-//	Attribute
+//Attribute
 	private String benutzername;
 	private String passwort;
 	private boolean exit;
 
-//	Getters und Setter erstellt
+//Getters und Setter erstellt
 	public String getBenutzername() {
 		return benutzername;
 	}
@@ -33,11 +33,11 @@ public class Person {
 		this.exit = exit;
 	}
 
-//	Konstruktor
+//Konstruktor
 	public Person() {
 	}
 
-//	Methoden
+//Methoden
 
 	// Mit der folgenden Methode können Veranstalter, Aktivitäten und
 	// Veranstaltungen gesucht und angezeigt werden.
@@ -58,7 +58,6 @@ public class Person {
 			}
 			// Der gewünschte Veranstalter wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstalter = Integer.valueOf(scan.nextLine().trim());
-			;
 
 			// Alle Aktivitäten des oben gewünschten Veranstalters werden angezeigt
 			Veranstalter veranstalter = data.getVeranstalter().get(auswahlVeranstalter);
@@ -85,7 +84,6 @@ public class Person {
 					+ veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter() + "\nAktivität: "
 					+ veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
 					+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
-
 		}
 		// Aktivitäten suchen
 		else if (auswahl1 == 2) {
@@ -114,7 +112,6 @@ public class Person {
 					"Ihre Auswahl, \nVeranstalter: " + veranstaltung.getAktivitaet().getVeranstalter().getVeranstalter()
 							+ "\nAktivität: " + veranstaltung.getAktivitaet().getBeschrieb() + "\nVeranstaltung: "
 							+ veranstaltung.getDatum().format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
-
 		}
 		// Veranstaltung suchen
 		else if (auswahl1 == 3) {
@@ -130,7 +127,6 @@ public class Person {
 			}
 			// Die gewünschte Veranstaltung wird ausgesucht und mit einer Zahl angegeben
 			int auswahlVeranstaltung = Integer.valueOf(scan.nextLine().trim());
-
 			veranstaltung = data.getVeranstaltung().get(auswahlVeranstaltung);
 
 			// Die gewählten Optionen werden ausgegeben

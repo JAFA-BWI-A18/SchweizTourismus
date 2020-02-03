@@ -6,7 +6,7 @@ import java.util.Scanner;
 //Diese Klasse dient als unsere Datenbank
 public class Data {
 
-	// Attribute
+// Attribute
 	private static Data instance;
 
 	private final List<Veranstalter> veranstalter;
@@ -15,7 +15,7 @@ public class Data {
 	private final List<Admin> admins;
 	private final List<Kunde> kunden;
 
-	// Konstruktor
+// Konstruktor
 	private Data() {
 		this.veranstalter = new ArrayList<>();
 		this.aktivitaeten = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Data {
 		this.basisAdminDaten();
 	}
 
-	// Getters and Setters
+// Getters and Setters
 	public List<Veranstalter> getVeranstalter() {
 		return veranstalter;
 	}
@@ -48,7 +48,7 @@ public class Data {
 		return admins;
 	}
 
-	// Methoden
+// Methoden
 	public static Data getInstance() {
 		if (instance == null) {
 			instance = new Data();
@@ -75,19 +75,20 @@ public class Data {
 
 	public Veranstaltung veranstaltungErfassen(Aktivitaet a, LocalDateTime datum, double preis, int totalPlaetze) {
 		Veranstaltung tmp = new Veranstaltung(a, datum, preis, totalPlaetze);
-		a.veranstaltungHinzufügen(tmp);
+		a.veranstaltungHinzufugen(tmp);
 		veranstaltungen.add(tmp);
 		return tmp;
 	}
 
 	public String bewertungHinzufuegen(Aktivitaet a, String text, int stern) {
 		Bewertung tmp = new Bewertung(text, stern);
-		a.bewertungHinzugügen(tmp);
+		a.bewertungHinzuguegen(tmp);
 		if (tmp.getBewertungText() != null && !tmp.getBewertungText().isBlank()) {
+			// Gutscheincode A wird ausgegeben
 			return "A";
 		}
+		// Gutscheincode B wird ausgegeben
 		return "B";
-
 	}
 
 	public void kundenHinzufuegen(Kunde kunde) {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Admin extends Person {
 
 	public void inputStart() {
-
+		//Man wird gefragt, was man machen will
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte gewünschte Aktion wählen: \n1 Neuen Veranstalter erfassen"
 				+ "\n2 Bestehenden Veranstalter bearbeiten" + "\n3 Veranstalter löschen"
@@ -13,16 +13,17 @@ public class Admin extends Person {
 				+ "\n6 Aktivität löschen" + "\n7 Neue Veranstaltung erfassen" + "\n8 Bestehende Veranstaltung bearbeiten"
 				+ "\n9 Veranstaltung löschen");
 		String zahl = scan.nextLine().trim();
-	
+		//Es werden nur die Fälle 1, 4 und 7 angeschaut. Die andere Fälle werden nicht aufgezeigt an der Präsentation
 		switch (zahl) {
+		//Wählt man 1, kann man einen neuen Veranstalter erfassen
 		case "1":
 			veranstalterErfassenInput();
 			break;
-
+		//Wählt man 4, kann man eine neue Aktivität erfassen
 		case "4":
 			aktivitaetErfassenInput();
 			break;
-
+		//Wählt man 7, kann man eine neue Veranstaltung erfassen
 		case "7":
 			veranstaltungErfassenInput();
 			break;
@@ -33,20 +34,20 @@ public class Admin extends Person {
 	}
 
 //	Methoden
-	// Neuen Veranstalter erfassen Vorführen
+	// Neuen Veranstalter kann erfasst werden
 	private void veranstalterErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bitte Veranstalter-Namen erfassen: ");
 		String veranstalterName = scan.nextLine().trim();
 		System.out.println("Bitte Veranstalter-Beschrieb erfassen: ");
 		String veranstalterBeschrieb = scan.nextLine().trim();
-			// Neuen Veranstalter erfassen Code:
+		// Neuen Veranstalter erfassen Code:
 		veranstalterErfassen(veranstalterName, veranstalterBeschrieb);
 		System.out.println("Veranstalter erfasst.");
 		//Data.getInstance().getVeranstalter().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
-	// Neue Aktivität erfassen Vorführen
+	// Neue Aktivität kann erfasst werden
 	private void aktivitaetErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		Data data = Data.getInstance();
@@ -69,7 +70,7 @@ public class Admin extends Person {
 		//data.getAktivitaet().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
-	// Neuen Veranstaltung erfassen Vorführen
+	// Neuen Veranstaltung kann erfasst werden
 	private void veranstaltungErfassenInput() {
 		Scanner scan = new Scanner(System.in);
 		Data data = Data.getInstance();
@@ -87,7 +88,7 @@ public class Admin extends Person {
 		double veranstaltungsPreis = Double.valueOf(scan.nextLine().trim());
 		System.out.println("Bitte Anzahl verfügbare Plätze erfassen: ");
 		int veranstaltungsPlaetze = Integer.valueOf(scan.nextLine().trim());
-
+		//Das Datum und die Uhrzeit werden vereint und formatiert
 		LocalDateTime datum = LocalDateTime.parse(veranstaltungsDatum + " " + veranstaltungsZeit,
 				DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
 
@@ -98,7 +99,7 @@ public class Admin extends Person {
 		//data.getVeranstaltung().stream().forEach(v -> System.out.println(v.toString()));
 	}
 
-	// Weitere Methoden
+// Weitere Methoden
 	public void veranstalterErfassen(String veranstalter, String beschreibung) {
 		Data.getInstance().veranstalterErfassen(veranstalter, beschreibung);
 	}

@@ -1,17 +1,17 @@
 
 public class Bewertung {
 
-//	Attribute
+//Attribute
 	private String bewertungText;
 	private int bewertungStern;
 
-//	Konstruktor
+//Konstruktor
 	public Bewertung(String bewertungText, int bewertungStern) {
 		this.bewertungText = bewertungText;
 		this.bewertungStern = bewertungStern;
 	}
 
-//	Getters und Setters für definierte Attribute
+//Getters und Setters für definierte Attribute
 	public String getBewertungText() {
 		return bewertungText;
 	}
